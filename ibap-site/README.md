@@ -1,16 +1,25 @@
-# React + Vite
+# Site IBAP-RJ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site institucional do Instituto Brasileiro de Administração Pública, desenvolvido com HTML, CSS e JavaScript puro.
 
-Currently, two official plugins are available:
+## Estrutura
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `index.html`: estrutura principal da página.
+- `css/style.css`: estilos gerais e responsividade.
+- `js/script.js`: dados dinâmicos, menu mobile, navegação ativa e atualização automática do ano no rodapé.
 
-## React Compiler
+## Como executar
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Não é necessário instalar dependências.
 
-## Expanding the ESLint configuration
+Abra o arquivo `index.html` diretamente no navegador ou utilize uma extensão de servidor local, como o Live Server.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tecnologias
+
+- HTML5
+- CSS3
+- JavaScript
+
+## Publicação
+
+O conteúdo da pasta `ibap-site` pode ser enviado diretamente para uma hospedagem estática ou para a pasta pública do servidor, como `public_html` em ambientes cPanel.

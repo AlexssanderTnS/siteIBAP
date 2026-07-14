@@ -1,13 +1,175 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ibap-site</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="IBAP-RJ — Instituto Brasileiro de Administração Pública. Soluções integradas, projetos, serviços e capacitação para uma gestão pública mais eficiente.">
+  <title>IBAP-RJ | Instituto Brasileiro de Administração Pública</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header class="header" id="inicio">
+    <a class="logo" href="#inicio" aria-label="IBAP-RJ - Página inicial">
+      <span class="logo-grid" aria-hidden="true">▦</span>
+      <div>
+        <strong>IBAP<span>RJ</span></strong>
+        <small>Instituto Brasileiro de Administração Pública</small>
+      </div>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav id="main-nav" class="main-nav" aria-label="Navegação principal">
+      <a href="#quem-somos">Quem Somos</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#servicos">Nossos Serviços</a>
+      <a href="#cursos">Cursos</a>
+      <a href="#transparencia">Transparência</a>
+      <a href="#boletim">Boletim IBAP-RJ</a>
+    </nav>
+
+    <a class="btn-dark header-contact" href="#contato">Fale Conosco</a>
+  </header>
+
+  <section class="hero" id="quem-somos">
+    <div class="hero-content">
+      <h1>
+        Soluções integradas<br>
+        para uma <span>administração pública</span> mais eficiente
+      </h1>
+
+      <p>
+        Núcleos especializados que combinam pesquisa aplicada, conhecimento
+        e inovação para desenvolver projetos de consultoria e assistência
+        técnica que geram impacto real na gestão pública e na sociedade.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="btn-green" href="#projetos">Conheça nossos projetos →</a>
+        <a class="btn-outline" href="#servicos">Nossos serviços</a>
+      </div>
+    </div>
+
+    <div class="hero-image" aria-label="Imagem representando gestão pública e inovação">
+      <div class="icon blue" aria-hidden="true">👥</div>
+      <div class="icon green" aria-hidden="true">🌿</div>
+      <div class="icon yellow" aria-hidden="true">📊</div>
+      <div class="icon navy" aria-hidden="true">🤝</div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="projetos">
+      <div class="section-title">
+        <h2>Projetos em destaque</h2>
+        <a href="#projetos">Ver todos os projetos →</a>
+      </div>
+      <div class="cards projetos" id="projetos-grid"></div>
+    </section>
+
+    <section class="services-grid" id="servicos">
+      <div class="services-box">
+        <h2>Nossos serviços</h2>
+        <div class="services-list" id="servicos-list"></div>
+        <a class="btn-dark inline-button" href="#servicos">Ver todos os serviços</a>
+      </div>
+
+      <div class="photo-box" role="img" aria-label="Equipe trabalhando em projeto de gestão pública"></div>
+
+      <div class="mission-box">
+        <h2>Nossa missão</h2>
+        <p>
+          Contribuir para o desenvolvimento de nossos clientes oferecendo
+          serviços de qualidade, soluções inovadoras e resultados efetivos,
+          trabalhando sempre com ética e responsabilidade socioambiental.
+        </p>
+        <strong>🌿 Certificação ISO</strong>
+        <small>Compromisso com a qualidade e a sustentabilidade.</small>
+      </div>
+    </section>
+
+    <section class="numbers" aria-labelledby="numbers-title">
+      <h2 id="numbers-title">IBAP-RJ em números</h2>
+      <div class="number-grid">
+        <div><strong>5.000+</strong><span>projetos realizados</span></div>
+        <div><strong>200+</strong><span>clientes atendidos</span></div>
+        <div><strong>30+</strong><span>anos de experiência</span></div>
+        <div><strong>Equipe</strong><span>colaboradores e especialistas</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="transparencia">
+      <h2 class="center">Nossos clientes</h2>
+      <div class="logos" id="clientes-grid"></div>
+      <div class="center button-center">
+        <a class="btn-outline-dark" href="#transparencia">Ver todos os clientes</a>
+      </div>
+    </section>
+
+    <section class="section" id="cursos">
+      <div class="section-title">
+        <h2>Cursos em destaque</h2>
+        <a href="#cursos">Ver todos os cursos →</a>
+      </div>
+      <div class="course-grid" id="cursos-grid"></div>
+    </section>
+
+    <section class="bottom-content">
+      <div class="boletim" id="boletim">
+        <h2>Boletim IBAP-RJ</h2>
+        <p>Acompanhe nossas notícias, artigos e publicações.</p>
+        <a class="btn-dark inline-button" href="#boletim">Acessar boletim</a>
+      </div>
+
+      <div class="instagram">
+        <h2>Nos siga no Instagram</h2>
+        <div class="insta-grid">
+          <div>Gestão pública que transforma realidades.</div>
+          <div>Planejamento estratégico para grandes resultados.</div>
+          <div>Inovação e tecnologia a serviço das pessoas.</div>
+          <div>Parcerias que geram impacto.</div>
+          <div>Conhecimento que capacita.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contato">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">IBAP<span>RJ</span></div>
+        <p>Instituto Brasileiro de Administração Pública vinculado ao Estado do Rio de Janeiro.</p>
+      </div>
+
+      <div>
+        <h4>Links rápidos</h4>
+        <a href="#quem-somos">Quem Somos</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#servicos">Nossos Serviços</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#transparencia">Transparência</a>
+      </div>
+
+      <div>
+        <h4>Contato</h4>
+        <p>Rua Buenos Aires, 68 / 31º - Rio de Janeiro - RJ</p>
+        <a href="tel:+552138609100">(21) 3860-9100</a>
+        <a href="mailto:denuncias@ibap-rj.org.br">denuncias@ibap-rj.org.br</a>
+      </div>
+
+      <div>
+        <h4>Onde estamos</h4>
+        <div class="map">📍 Mapa</div>
+      </div>
+    </div>
+
+    <div class="copy">© <span id="current-year"></span> IBAP-RJ - Todos os direitos reservados.</div>
+  </footer>
+
+  <script src="./js/script.js"></script>
+</body>
 </html>
