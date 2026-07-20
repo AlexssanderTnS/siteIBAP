@@ -180,9 +180,8 @@ a[class^="btn-"]:hover,
 .hero {
   height: 400px;
   display: grid;
-  background-image: url(/ibap-site/assets/images/Banner.png);
-  image-rendering: optimizeQuality;
-  background-size: cover;
+  background-image: url(/ibap-site/assets/images/Bannerludopatia.png);
+  background-size: contain;
   grid-template-columns: 1fr 1.1fr;
   color: #fff;
 }
