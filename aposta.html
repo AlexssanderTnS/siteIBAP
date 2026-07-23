@@ -1,3958 +1,983 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Grana na Real — educação financeira, comportamento e jogo responsável."
-  >
-
-  <title>Grana na Real</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    :root {
-      --navy-950: #04162d;
-      --navy-900: #061b35;
-      --navy-800: #0a3158;
-      --blue: #0b73df;
-      --cyan: #18c6d6;
-      --mint: #45e0ba;
-      --mint-dark: #16ae89;
-      --yellow: #ffca3a;
-      --orange: #ff8c2a;
-      --purple: #8e69ef;
-      --pink: #e879c9;
-      --green: #35c98f;
-      --red: #f45b69;
-
-      --white: #ffffff;
-      --ink: #14213d;
-      --muted: #687386;
-      --soft: #f7f8fc;
-      --line: #e6e9f2;
-
-      --shadow:
-        0 22px 55px
-        rgba(11, 39, 77, 0.12);
-
-      --shadow-soft:
-        0 12px 30px
-        rgba(13, 38, 76, 0.08);
-
-      --radius: 24px;
-      --container: 1160px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 78px;
-    }
-
-    body {
-      min-width: 320px;
-
-      overflow-x: hidden;
-
-      font-family: "Inter", sans-serif;
-
-      background: var(--white);
-      color: var(--ink);
-    }
-
-    body.menu-open {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      border: none;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
-
-    svg {
-      width: 1em;
-      height: 1em;
-    }
-
-    .container {
-      width:
-        min(
-          calc(100% - 40px),
-          var(--container)
-        );
-
-      margin-inline: auto;
-    }
-
-    .section {
-      padding: 90px 0;
-    }
-
-    .section-soft {
-      background:
-        linear-gradient(
-          180deg,
-          #fbfbfe,
-          #f7f8fc
-        );
-    }
-
-    .section-heading {
-      max-width: 720px;
-
-      margin:
-        0
-        auto
-        46px;
-
-      text-align: center;
-    }
-
-    .section-heading h2 {
-      margin-top: 10px;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size:
-        clamp(
-          2rem,
-          4vw,
-          3.1rem
-        );
-
-      font-weight: 800;
-
-      line-height: 1.06;
-
-      letter-spacing: -0.045em;
-    }
-
-    .section-heading p {
-      max-width: 620px;
-
-      margin:
-        15px
-        auto
-        0;
-
-      color: var(--muted);
-
-      line-height: 1.75;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-
-      gap: 7px;
-
-      color: var(--blue);
-
-      font-size: 0.72rem;
-      font-weight: 800;
-
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow-light {
-      color: var(--mint);
-    }
-
-    .button {
-      min-height: 50px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      gap: 9px;
-
-      padding: 12px 22px;
-
-      border:
-        1px
-        solid
-        transparent;
-
-      border-radius: 999px;
-
-      font-weight: 800;
-
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background-color 0.25s ease;
-    }
-
-    .button:hover {
-      transform:
-        translateY(-3px);
-    }
-
-    .button-mint {
-      background: var(--mint);
-      color: var(--navy-950);
-
-      box-shadow:
-        0
-        14px
-        32px
-        rgba(69, 224, 186, 0.22);
-    }
-
-    .button-ghost {
-      border-color:
-        rgba(255, 255, 255, 0.3);
-
-      background:
-        rgba(255, 255, 255, 0.08);
-
-      color: var(--white);
-
-      backdrop-filter:
-        blur(12px);
-    }
-
-    .button-yellow {
-      background: var(--yellow);
-      color: var(--navy-950);
-    }
-
-    .button-outline {
-      border-color: var(--navy-900);
-      color: var(--navy-900);
-    }
-
-    /* HEADER */
-
-    .header {
-      position: sticky;
-
-      top: 0;
-
-      z-index: 50;
-
-      background:
-        rgba(6, 27, 53, 0.95);
-
-      border-bottom:
-        1px
-        solid
-        rgba(255, 255, 255, 0.08);
-
-      backdrop-filter:
-        blur(16px);
-    }
-
-    .header-inner {
-      min-height: 76px;
-
-      display: flex;
-      align-items: center;
-
-      gap: 26px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-
-      gap: 10px;
-
-      flex-shrink: 0;
-    }
-
-    .brand-mark {
-      width: 39px;
-      height: 39px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 12px;
-
-      background:
-        linear-gradient(
-          145deg,
-          var(--mint),
-          var(--cyan)
-        );
-
-      color: var(--navy-950);
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size: 1.15rem;
-      font-weight: 900;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-
-      line-height: 0.95;
-    }
-
-    .brand-text strong {
-      color: var(--white);
-
-      font-family:
-        "Manrope",
-        sans-serif;
-    }
-
-    .brand-text small {
-      color: var(--mint);
-
-      font-size: 0.66rem;
-      font-weight: 700;
-    }
-
-    .main-nav {
-      margin-left: auto;
-
-      display: flex;
-      align-items: center;
-
-      gap: 20px;
-    }
-
-    .main-nav a {
-      position: relative;
-
-      color:
-        rgba(255, 255, 255, 0.72);
-
-      font-size: 0.76rem;
-      font-weight: 700;
-
-      transition:
-        color 0.2s ease;
-    }
-
-    .main-nav a::after {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      bottom: -8px;
-
-      width: 0;
-      height: 2px;
-
-      background: var(--mint);
-
-      transition:
-        width 0.2s ease;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active {
-      color: var(--white);
-    }
-
-    .main-nav a:hover::after,
-    .main-nav a.active::after {
-      width: 100%;
-    }
-
-    .header-cta {
-      display: inline-flex;
-      align-items: center;
-
-      gap: 7px;
-
-      padding: 10px 15px;
-
-      border-radius: 999px;
-
-      background: var(--mint);
-      color: var(--navy-950);
-
-      font-size: 0.76rem;
-      font-weight: 800;
-    }
-
-    .menu-toggle {
-      display: none;
-
-      width: 44px;
-      height: 44px;
-
-      margin-left: auto;
-
-      padding: 9px;
-
-      border-radius: 12px;
-
-      background:
-        rgba(255, 255, 255, 0.08);
-    }
-
-    .menu-toggle span {
-      display: block;
-
-      height: 2px;
-
-      margin: 5px 0;
-
-      border-radius: 999px;
-
-      background: var(--white);
-    }
-
-    /* HERO */
-
-    .hero {
-      position: relative;
-
-      min-height: 650px;
-
-      overflow: hidden;
-
-      background:
-        radial-gradient(
-          circle at 80% 42%,
-          rgba(24, 198, 214, 0.24),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 70% 72%,
-          rgba(142, 105, 239, 0.16),
-          transparent 24%
-        ),
-        linear-gradient(
-          135deg,
-          #04172f,
-          #072f59 55%,
-          #064f76
-        );
-
-      color: var(--white);
-    }
-
-    .hero-grid {
-      position: absolute;
-
-      inset: 0;
-
-      opacity: 0.11;
-
-      background-image:
-        linear-gradient(
-          rgba(255, 255, 255, 0.15) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.15) 1px,
-          transparent 1px
-        );
-
-      background-size:
-        44px
-        44px;
-    }
-
-    .hero-layout {
-      min-height: 650px;
-
-      display: grid;
-
-      grid-template-columns:
-        0.92fr
-        1.08fr;
-
-      align-items: center;
-
-      gap: 48px;
-
-      padding:
-        72px
-        0
-        94px;
-    }
-
-    .hero-content {
-      position: relative;
-
-      z-index: 3;
-    }
-
-    .hero-content h1 {
-      margin-top: 18px;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size:
-        clamp(
-          3rem,
-          6vw,
-          5.1rem
-        );
-
-      font-weight: 800;
-
-      line-height: 0.98;
-
-      letter-spacing: -0.06em;
-    }
-
-    .hero-content h1 span {
-      color: var(--mint);
-    }
-
-    .hero-content p {
-      max-width: 560px;
-
-      margin-top: 24px;
-
-      color:
-        rgba(255, 255, 255, 0.76);
-
-      font-size: 1.04rem;
-
-      line-height: 1.8;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 12px;
-
-      margin-top: 28px;
-    }
-
-    .hero-points {
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 16px;
-
-      margin-top: 22px;
-    }
-
-    .hero-points span {
-      display: flex;
-      align-items: center;
-
-      gap: 6px;
-
-      color:
-        rgba(255, 255, 255, 0.68);
-
-      font-size: 0.77rem;
-      font-weight: 700;
-    }
-
-    .hero-points svg {
-      color: var(--mint);
-    }
-
-    .hero-visual {
-      position: relative;
-
-      min-height: 500px;
-    }
-
-    .character-glow {
-      position: absolute;
-
-      inset:
-        80px
-        55px
-        20px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(24, 198, 214, 0.2);
-
-      filter:
-        blur(54px);
-
-      animation:
-        pulseGlow
-        4.5s
-        ease-in-out
-        infinite;
-    }
-
-    .character {
-      position: absolute;
-
-      z-index: 3;
-    }
-
-    .character-neurado {
-      left: 5%;
-      bottom: 50px;
-    }
-
-    .character-betinho {
-      right: 1%;
-      bottom: 32px;
-    }
-
-    .character-avatar {
-      position: relative;
-
-      display: grid;
-      place-items: center;
-
-      filter:
-        drop-shadow(
-          0
-          26px
-          30px
-          rgba(0, 0, 0, 0.24)
-        );
-    }
-
-    .avatar-neurado {
-      width: 245px;
-      height: 315px;
-
-      border-radius:
-        44%
-        44%
-        38%
-        38%
-        /
-        34%
-        34%
-        52%
-        52%;
-
-      background:
-        radial-gradient(
-          circle at 36% 22%,
-          #7bf4ef,
-          transparent 12%
-        ),
-        radial-gradient(
-          circle at 63% 18%,
-          #56dfe4,
-          transparent 15%
-        ),
-        radial-gradient(
-          circle at 45% 42%,
-          #2dccd3,
-          #1294b0 70%
-        );
-
-      box-shadow:
-        inset
-        -22px
-        -26px
-        40px
-        rgba(0, 63, 103, 0.28);
-    }
-
-    .avatar-neurado::after {
-      content: "";
-
-      position: absolute;
-
-      left: 28px;
-      right: 28px;
-      bottom: -54px;
-
-      height: 120px;
-
-      z-index: -1;
-
-      border:
-        8px
-        solid
-        rgba(255, 255, 255, 0.75);
-
-      border-radius:
-        52%
-        52%
-        24px
-        24px;
-
-      background:
-        linear-gradient(
-          180deg,
-          #edf8ff,
-          #d6eef8
-        );
-    }
-
-    .brain-emoji {
-      position: absolute;
-
-      top: 18px;
-
-      font-size: 9.5rem;
-
-      opacity: 0.34;
-    }
-
-    .character-glasses {
-      position: absolute;
-
-      top: 118px;
-
-      color: var(--navy-950);
-
-      font-size: 2.25rem;
-      font-weight: 900;
-
-      letter-spacing: 10px;
-    }
-
-    .character-smile {
-      position: absolute;
-
-      top: 170px;
-
-      color: var(--navy-950);
-
-      font-size: 3rem;
-    }
-
-    .avatar-betinho {
-      width: 250px;
-      height: 360px;
-
-      border-radius:
-        46%
-        46%
-        40px
-        40px;
-
-      background:
-        linear-gradient(
-          180deg,
-          #ffbc48,
-          #ff8f20
-        );
-
-      box-shadow:
-        inset
-        -24px
-        -30px
-        44px
-        rgba(182, 74, 0, 0.18);
-    }
-
-    .boy-emoji {
-      font-size: 10.8rem;
-
-      transform:
-        translateY(-24px);
-    }
-
-    .character-label {
-      position: absolute;
-
-      left: 50%;
-      bottom: -50px;
-
-      min-width: 185px;
-
-      padding: 11px 15px;
-
-      border-radius: 15px;
-
-      background:
-        rgba(255, 255, 255, 0.96);
-
-      color: var(--ink);
-
-      text-align: center;
-
-      transform:
-        translateX(-50%);
-
-      box-shadow: var(--shadow);
-    }
-
-    .character-label strong,
-    .character-label small {
-      display: block;
-    }
-
-    .character-label small {
-      margin-top: 3px;
-
-      color: var(--muted);
-    }
-
-    .speech-card {
-      position: absolute;
-
-      z-index: 5;
-
-      padding: 13px 17px;
-
-      border-radius: 17px;
-
-      font-size: 0.78rem;
-      font-weight: 800;
-
-      box-shadow: var(--shadow);
-
-      animation:
-        floating
-        4.4s
-        ease-in-out
-        infinite;
-    }
-
-    .speech-card-one {
-      top: 24px;
-      right: 58px;
-
-      background: var(--mint);
-      color: var(--navy-950);
-    }
-
-    .speech-card-two {
-      top: 112px;
-      right: 0;
-
-      background: var(--orange);
-
-      animation-delay: 0.6s;
-    }
-
-    .hero-mini-card {
-      position: absolute;
-
-      z-index: 5;
-
-      display: flex;
-      align-items: center;
-
-      gap: 7px;
-
-      padding: 10px 13px;
-
-      border:
-        1px
-        solid
-        rgba(255, 255, 255, 0.2);
-
-      border-radius: 14px;
-
-      background:
-        rgba(255, 255, 255, 0.11);
-
-      font-size: 0.72rem;
-      font-weight: 700;
-
-      backdrop-filter:
-        blur(14px);
-
-      animation:
-        floating
-        4.3s
-        ease-in-out
-        infinite;
-    }
-
-    .hero-mini-card svg {
-      color: var(--mint);
-    }
-
-    .mini-card-left {
-      left: -12px;
-      top: 165px;
-    }
-
-    .mini-card-right {
-      right: 18px;
-      bottom: 118px;
-
-      animation-delay: 1s;
-    }
-
-    .floating-icon {
-      position: absolute;
-
-      z-index: 2;
-
-      display: grid;
-      place-items: center;
-
-      box-shadow: var(--shadow);
-
-      animation:
-        floatingRotate
-        5s
-        ease-in-out
-        infinite;
-    }
-
-    .floating-coin {
-      top: 84px;
-      right: 5%;
-
-      width: 46px;
-      height: 46px;
-
-      border-radius: 50%;
-
-      background: var(--yellow);
-      color: var(--navy-950);
-    }
-
-    .floating-chart {
-      top: 100px;
-      right: 47%;
-
-      width: 52px;
-      height: 52px;
-
-      border-radius: 17px;
-
-      background: var(--white);
-      color: var(--blue);
-
-      animation-delay: 0.4s;
-    }
-
-    .floating-target {
-      right: 41%;
-      bottom: 112px;
-
-      width: 48px;
-      height: 48px;
-
-      border-radius: 16px;
-
-      background: var(--purple);
-
-      animation-delay: 0.8s;
-    }
-
-    .hero-wave {
-      position: absolute;
-
-      left: -4%;
-      right: -4%;
-      bottom: -82px;
-
-      height: 150px;
-
-      border-radius:
-        50%
-        50%
-        0
-        0;
-
-      background: var(--white);
-
-      transform:
-        rotate(-2deg);
-    }
-
-    /* REFLEXÕES */
-
-    .thought-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 18px;
-    }
-
-    .thought-card {
-      min-height: 248px;
-
-      padding: 25px;
-
-      border:
-        1px
-        solid
-        var(--line);
-
-      border-radius: var(--radius);
-
-      background: var(--white);
-      color: var(--ink);
-
-      text-align: left;
-
-      box-shadow: var(--shadow-soft);
-
-      cursor: pointer;
-
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-    }
-
-    .thought-card:hover {
-      transform:
-        translateY(-8px);
-
-      box-shadow: var(--shadow);
-    }
-
-    .thought-icon {
-      width: 57px;
-      height: 57px;
-
-      display: grid;
-      place-items: center;
-
-      margin-bottom: 20px;
-
-      border-radius: 18px;
-
-      font-size: 1.5rem;
-    }
-
-    .thought-blue {
-      background: #e9f3ff;
-      color: var(--blue);
-    }
-
-    .thought-yellow {
-      background: #fff6da;
-      color: #d89a00;
-    }
-
-    .thought-mint {
-      background: #e8fbf5;
-      color: var(--mint-dark);
-    }
-
-    .thought-purple {
-      background: #f0ebff;
-      color: var(--purple);
-    }
-
-    .thought-card strong {
-      display: block;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-    }
-
-    .thought-card p {
-      margin-top: 11px;
-
-      color: var(--muted);
-
-      font-size: 0.88rem;
-
-      line-height: 1.62;
-    }
-
-    .thought-link {
-      display: flex;
-      align-items: center;
-
-      gap: 6px;
-
-      margin-top: 17px;
-
-      color: var(--blue);
-
-      font-size: 0.77rem;
-      font-weight: 800;
-    }
-
-    /* PERSONAGENS */
-
-    .characters-grid {
-      display: grid;
-
-      grid-template-columns:
-        1fr
-        1fr;
-
-      gap: 24px;
-    }
-
-    .profile-card {
-      min-height: 405px;
-
-      display: grid;
-
-      grid-template-columns:
-        1fr
-        0.8fr;
-
-      overflow: hidden;
-
-      border-radius: 32px;
-
-      color: var(--white);
-
-      box-shadow: var(--shadow);
-    }
-
-    .profile-neurado {
-      background:
-        linear-gradient(
-          135deg,
-          #0b6176,
-          #15b6c2
-        );
-    }
-
-    .profile-betinho {
-      background:
-        linear-gradient(
-          135deg,
-          #ff8b1f,
-          #ffb13b
-        );
-    }
-
-    .profile-copy {
-      padding:
-        40px
-        12px
-        40px
-        40px;
-    }
-
-    .profile-copy h3 {
-      margin-top: 7px;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size: 2.4rem;
-      font-weight: 800;
-    }
-
-    .profile-copy p {
-      margin-top: 13px;
-
-      color:
-        rgba(255, 255, 255, 0.84);
-
-      line-height: 1.68;
-    }
-
-    .profile-copy ul {
-      display: grid;
-
-      gap: 9px;
-
-      margin-top: 20px;
-
-      list-style: none;
-    }
-
-    .profile-copy li {
-      display: flex;
-      align-items: center;
-
-      gap: 7px;
-
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .profile-copy a {
-      display: inline-flex;
-      align-items: center;
-
-      gap: 7px;
-
-      margin-top: 24px;
-
-      padding-bottom: 3px;
-
-      border-bottom:
-        1px
-        solid
-        rgba(255, 255, 255, 0.5);
-
-      font-size: 0.77rem;
-      font-weight: 800;
-    }
-
-    .profile-visual {
-      position: relative;
-
-      display: grid;
-      place-items: center;
-    }
-
-    .profile-mascot {
-      position: relative;
-
-      z-index: 2;
-
-      font-size: 8.5rem;
-
-      filter:
-        drop-shadow(
-          0
-          20px
-          28px
-          rgba(0, 0, 0, 0.18)
-        );
-
-      animation:
-        mascotBounce
-        4s
-        ease-in-out
-        infinite;
-    }
-
-    .profile-orbit {
-      position: absolute;
-
-      border:
-        1px
-        solid
-        rgba(255, 255, 255, 0.25);
-
-      border-radius: 50%;
-
-      animation:
-        orbit
-        12s
-        linear
-        infinite;
-    }
-
-    .profile-orbit-one {
-      width: 205px;
-      height: 205px;
-    }
-
-    .profile-orbit-two {
-      width: 275px;
-      height: 275px;
-
-      animation-duration: 16s;
-      animation-direction: reverse;
-    }
-
-    /* JORNADA */
-
-    .journey-section {
-      overflow: hidden;
-
-      background:
-        radial-gradient(
-          circle at 15% 20%,
-          rgba(69, 224, 186, 0.14),
-          transparent 30%
-        ),
-        linear-gradient(
-          145deg,
-          #061b35,
-          #092d53
-        );
-
-      color: var(--white);
-    }
-
-    .journey-section .section-heading p {
-      color:
-        rgba(255, 255, 255, 0.68);
-    }
-
-    .journey-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(8, 1fr);
-
-      gap: 17px;
-    }
-
-    .journey-step {
-      text-align: center;
-    }
-
-    .journey-icon {
-      width: 61px;
-      height: 61px;
-
-      display: grid;
-      place-items: center;
-
-      margin:
-        0
-        auto
-        15px;
-
-      border:
-        5px
-        solid
-        rgba(255, 255, 255, 0.1);
-
-      border-radius: 20px;
-
-      color: var(--navy-950);
-
-      font-size: 1.3rem;
-
-      box-shadow:
-        0
-        14px
-        34px
-        rgba(0, 0, 0, 0.16);
-
-      animation:
-        floating
-        4s
-        ease-in-out
-        infinite;
-    }
-
-    .journey-step:nth-child(2) .journey-icon {
-      animation-delay: 0.25s;
-    }
-
-    .journey-step:nth-child(3) .journey-icon {
-      animation-delay: 0.5s;
-    }
-
-    .journey-step:nth-child(4) .journey-icon {
-      animation-delay: 0.75s;
-    }
-
-    .journey-step:nth-child(5) .journey-icon {
-      animation-delay: 1s;
-    }
-
-    .journey-step:nth-child(6) .journey-icon {
-      animation-delay: 1.25s;
-    }
-
-    .journey-step:nth-child(7) .journey-icon {
-      animation-delay: 1.5s;
-    }
-
-    .journey-step:nth-child(8) .journey-icon {
-      animation-delay: 1.75s;
-    }
-
-    .journey-green {
-      background: var(--green);
-    }
-
-    .journey-yellow {
-      background: var(--yellow);
-    }
-
-    .journey-blue {
-      background: #65c5ff;
-    }
-
-    .journey-purple {
-      background: #ba9efc;
-    }
-
-    .journey-navy {
-      background: #8cb7ff;
-    }
-
-    .journey-coral {
-      background: #ff958d;
-    }
-
-    .journey-red {
-      background: #ff7a86;
-    }
-
-    .journey-gold {
-      background: #ffd76b;
-    }
-
-    .journey-step strong {
-      display: block;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size: 0.88rem;
-    }
-
-    .journey-step p {
-      margin-top: 7px;
-
-      color:
-        rgba(255, 255, 255, 0.6);
-
-      font-size: 0.72rem;
-
-      line-height: 1.5;
-    }
-
-    /* EXPERIÊNCIAS */
-
-    .experience-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(5, 1fr);
-
-      gap: 18px;
-    }
-
-    .experience-card {
-      padding: 24px;
-
-      border:
-        1px
-        solid
-        var(--line);
-
-      border-radius: var(--radius);
-
-      background: var(--white);
-
-      box-shadow: var(--shadow-soft);
-
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-    }
-
-    .experience-card:hover {
-      transform:
-        translateY(-8px);
-
-      box-shadow: var(--shadow);
-    }
-
-    .experience-icon {
-      width: 57px;
-      height: 57px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 18px;
-
-      color: var(--white);
-
-      font-size: 1.4rem;
-    }
-
-    .experience-navy {
-      background: var(--navy-800);
-    }
-
-    .experience-purple {
-      background: var(--purple);
-    }
-
-    .experience-green {
-      background: var(--green);
-    }
-
-    .experience-orange {
-      background: var(--orange);
-    }
-
-    .experience-pink {
-      background: var(--pink);
-    }
-
-    .experience-card h3 {
-      margin-top: 18px;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size: 1rem;
-    }
-
-    .experience-card p {
-      margin-top: 9px;
-
-      color: var(--muted);
-
-      font-size: 0.82rem;
-
-      line-height: 1.62;
-    }
-
-    .experience-card a,
-    .article-card a {
-      display: flex;
-      align-items: center;
-
-      gap: 6px;
-
-      margin-top: 16px;
-
-      color: var(--blue);
-
-      font-size: 0.77rem;
-      font-weight: 800;
-    }
-
-    /* ESPECIALISTAS */
-
-    .experts-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 20px;
-    }
-
-    .expert-card,
-    .expert-highlight {
-      overflow: hidden;
-
-      border:
-        1px
-        solid
-        var(--line);
-
-      border-radius: var(--radius);
-
-      background: var(--white);
-
-      box-shadow: var(--shadow-soft);
-    }
-
-    .expert-card img {
-      height: 225px;
-
-      object-fit: cover;
-    }
-
-    .expert-card div {
-      padding: 21px;
-    }
-
-    .expert-card h3 {
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size: 1rem;
-    }
-
-    .expert-card p {
-      margin-top: 8px;
-
-      color: var(--muted);
-
-      font-size: 0.8rem;
-
-      line-height: 1.52;
-    }
-
-    .expert-card span {
-      display: inline-block;
-
-      margin-top: 13px;
-
-      color: var(--blue);
-
-      font-size: 0.7rem;
-      font-weight: 800;
-    }
-
-    .expert-highlight {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      padding: 30px;
-
-      background:
-        radial-gradient(
-          circle at 90% 20%,
-          rgba(142, 105, 239, 0.2),
-          transparent 38%
-        ),
-        linear-gradient(
-          145deg,
-          var(--navy-900),
-          var(--navy-800)
-        );
-
-      color: var(--white);
-    }
-
-    .expert-highlight svg {
-      width: 44px;
-      height: 44px;
-
-      color: var(--mint);
-    }
-
-    .expert-highlight strong {
-      margin-top: 22px;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size: 1.4rem;
-    }
-
-    .expert-highlight p {
-      margin-top: 11px;
-
-      color:
-        rgba(255, 255, 255, 0.66);
-
-      font-size: 0.85rem;
-
-      line-height: 1.62;
-    }
-
-    /* BLOG */
-
-    .article-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 24px;
-    }
-
-    .article-card {
-      overflow: hidden;
-
-      border:
-        1px
-        solid
-        var(--line);
-
-      border-radius: var(--radius);
-
-      background: var(--white);
-
-      box-shadow: var(--shadow-soft);
-
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-    }
-
-    .article-card:hover {
-      transform:
-        translateY(-8px);
-
-      box-shadow: var(--shadow);
-    }
-
-    .article-card img {
-      height: 215px;
-
-      object-fit: cover;
-    }
-
-    .article-card div {
-      padding: 23px;
-    }
-
-    .article-card span {
-      color: var(--blue);
-
-      font-size: 0.7rem;
-      font-weight: 800;
-
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .article-card h3 {
-      margin-top: 9px;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size: 1.06rem;
-
-      line-height: 1.38;
-    }
-
-    .article-card p {
-      margin-top: 10px;
-
-      color: var(--muted);
-
-      font-size: 0.84rem;
-
-      line-height: 1.62;
-    }
-
-    .section-center {
-      margin-top: 32px;
-
-      text-align: center;
-    }
-
-    /* CTA */
-
-    .cta-section {
-      position: relative;
-
-      overflow: hidden;
-
-      padding: 60px 0;
-
-      background:
-        linear-gradient(
-          90deg,
-          #0ca7aa,
-          #10c2b1,
-          #724bd8
-        );
-
-      color: var(--white);
-    }
-
-    .cta-section::before {
-      content: "";
-
-      position: absolute;
-
-      inset: 0;
-
-      opacity: 0.13;
-
-      background-image:
-        radial-gradient(
-          circle at 14px 14px,
-          #ffffff 2px,
-          transparent 2px
-        );
-
-      background-size:
-        34px
-        34px;
-    }
-
-    .cta-layout {
-      position: relative;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 40px;
-    }
-
-    .cta-copy {
-      max-width: 680px;
-    }
-
-    .cta-copy h2 {
-      margin-top: 10px;
-
-      font-family:
-        "Manrope",
-        sans-serif;
-
-      font-size:
-        clamp(
-          2rem,
-          4vw,
-          3.2rem
-        );
-
-      font-weight: 800;
-
-      line-height: 1.05;
-
-      letter-spacing: -0.045em;
-    }
-
-    .cta-copy p {
-      margin-top: 13px;
-
-      color:
-        rgba(255, 255, 255, 0.78);
-    }
-
-    .cta-actions {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-
-      gap: 12px;
-    }
-
-    .cta-actions span {
-      display: flex;
-      align-items: center;
-
-      gap: 7px;
-
-      color:
-        rgba(255, 255, 255, 0.8);
-
-      font-size: 0.76rem;
-      font-weight: 700;
-    }
-
-    /* FOOTER */
-
-    .footer {
-      padding:
-        60px
-        0
-        24px;
-
-      background: var(--navy-950);
-      color: var(--white);
-    }
-
-    .footer-grid {
-      display: grid;
-
-      grid-template-columns:
-        1.35fr
-        repeat(3, 0.8fr)
-        1.2fr;
-
-      gap: 40px;
-    }
-
-    .footer-brand p,
-    .footer-newsletter p {
-      max-width: 260px;
-
-      margin-top: 16px;
-
-      color:
-        rgba(255, 255, 255, 0.52);
-
-      font-size: 0.8rem;
-
-      line-height: 1.65;
-    }
-
-    .footer h3 {
-      margin-bottom: 15px;
-
-      font-size: 0.82rem;
-    }
-
-    .footer a:not(.brand) {
-      display: block;
-
-      margin-top: 9px;
-
-      color:
-        rgba(255, 255, 255, 0.52);
-
-      font-size: 0.76rem;
-    }
-
-    .newsletter-form {
-      display: flex;
-
-      margin-top: 14px;
-
-      overflow: hidden;
-
-      border:
-        1px
-        solid
-        rgba(255, 255, 255, 0.13);
-
-      border-radius: 12px;
-
-      background:
-        rgba(255, 255, 255, 0.06);
-    }
-
-    .newsletter-form input {
-      min-width: 0;
-
-      flex: 1;
-
-      padding: 11px 13px;
-
-      border: none;
-
-      outline: none;
-
-      background: transparent;
-      color: var(--white);
-    }
-
-    .newsletter-form button {
-      width: 46px;
-
-      display: grid;
-      place-items: center;
-
-      background: var(--mint);
-      color: var(--navy-950);
-
-      cursor: pointer;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-
-      gap: 18px;
-
-      margin-top: 44px;
-
-      padding-top: 21px;
-
-      border-top:
-        1px
-        solid
-        rgba(255, 255, 255, 0.1);
-
-      color:
-        rgba(255, 255, 255, 0.4);
-
-      font-size: 0.7rem;
-    }
-
-    /* MODAL */
-
-    .reflection-modal {
-      width:
-        min(
-          calc(100% - 32px),
-          470px
-        );
-
-      margin: auto;
-
-      padding: 34px;
-
-      border: none;
-
-      border-radius: 24px;
-
-      text-align: center;
-
-      box-shadow:
-        0
-        30px
-        100px
-        rgba(4, 22, 45, 0.32);
-    }
-
-    .reflection-modal::backdrop {
-      background:
-        rgba(4, 22, 45, 0.68);
-
-      backdrop-filter:
-        blur(6px);
-    }
-
-    .modal-close {
-      position: absolute;
-
-      top: 14px;
-      right: 14px;
-
-      width: 38px;
-      height: 38px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 50%;
-
-      background: var(--soft);
-
-      cursor: pointer;
-    }
-
-    .modal-icon {
-      width: 63px;
-      height: 63px;
-
-      display: grid;
-      place-items: center;
-
-      margin:
-        0
-        auto
-        17px;
-
-      border-radius: 20px;
-
-      background: #fff6da;
-      color: #d99a00;
-
-      font-size: 1.55rem;
-    }
-
-    .reflection-modal h2 {
-      font-family:
-        "Manrope",
-        sans-serif;
-    }
-
-    .reflection-modal p {
-      margin-top: 13px;
-
-      color: var(--muted);
-
-      line-height: 1.68;
-    }
-
-    .modal-button {
-      margin-top: 22px;
-    }
-
-    /* SCROLL REVEAL */
-
-    .reveal {
-      opacity: 0;
-
-      transform:
-        translateY(32px);
-
-      transition:
-        opacity 0.75s ease,
-        transform 0.75s ease;
-    }
-
-    .reveal-left {
-      transform:
-        translateX(-32px);
-    }
-
-    .reveal-right {
-      transform:
-        translateX(32px);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-
-      transform: none;
-    }
-
-    .sr-only {
-      position: absolute;
-
-      width: 1px;
-      height: 1px;
-
-      overflow: hidden;
-
-      clip:
-        rect(
-          0,
-          0,
-          0,
-          0
-        );
-
-      white-space: nowrap;
-    }
-
-    /* ANIMAÇÕES */
-
-    @keyframes pulseGlow {
-      0%,
-      100% {
-        transform:
-          scale(0.94);
-
-        opacity: 0.55;
-      }
-
-      50% {
-        transform:
-          scale(1.08);
-
-        opacity: 0.95;
-      }
-    }
-
-    @keyframes floating {
-      0%,
-      100% {
-        transform:
-          translateY(0)
-          rotate(-1deg);
-      }
-
-      50% {
-        transform:
-          translateY(-12px)
-          rotate(2deg);
-      }
-    }
-
-    @keyframes floatingRotate {
-      0%,
-      100% {
-        transform:
-          translateY(0)
-          rotate(-8deg);
-      }
-
-      50% {
-        transform:
-          translateY(-14px)
-          rotate(10deg);
-      }
-    }
-
-    @keyframes mascotBounce {
-      0%,
-      100% {
-        transform:
-          translateY(0)
-          rotate(-2deg);
-      }
-
-      50% {
-        transform:
-          translateY(-12px)
-          rotate(2deg);
-      }
-    }
-
-    @keyframes orbit {
-      to {
-        transform:
-          rotate(360deg);
-      }
-    }
-
-    /* RESPONSIVIDADE */
-
-    @media (max-width: 1100px) {
-      .main-nav {
-        gap: 13px;
-      }
-
-      .main-nav a {
-        font-size: 0.69rem;
-      }
-
-      .journey-grid {
-        grid-template-columns:
-          repeat(4, 1fr);
-
-        row-gap: 38px;
-      }
-
-      .experience-grid {
-        grid-template-columns:
-          repeat(3, 1fr);
-      }
-
-      .experts-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-      .footer-grid {
-        grid-template-columns:
-          1.2fr
-          repeat(2, 0.8fr);
-      }
-
-      .footer-newsletter {
-        grid-column:
-          span 2;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .header-cta {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      .main-nav {
-        position: fixed;
-
-        top: 76px;
-        right: -100%;
-
-        width:
-          min(
-            360px,
-            88vw
-          );
-
-        height:
-          calc(
-            100vh - 76px
-          );
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 0;
-
-        padding: 28px;
-
-        background: var(--navy-950);
-
-        transition:
-          right 0.28s ease;
-      }
-
-      .main-nav.open {
-        right: 0;
-      }
-
-      .main-nav a {
-        padding: 15px 0;
-
-        border-bottom:
-          1px
-          solid
-          rgba(255, 255, 255, 0.08);
-
-        font-size: 0.9rem;
-      }
-
-      .hero-layout {
-        grid-template-columns:
-          1fr;
-
-        padding:
-          72px
-          0
-          110px;
-      }
-
-      .hero-visual {
-        min-height: 510px;
-
-        max-width: 680px;
-
-        width: 100%;
-
-        margin: auto;
-      }
-
-      .thought-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-      .characters-grid {
-        grid-template-columns:
-          1fr;
-      }
-
-      .experience-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-      .article-grid {
-        grid-template-columns:
-          1fr
-          1fr;
-      }
-
-      .article-card:last-child {
-        grid-column:
-          span 2;
-      }
-
-      .cta-layout {
-        align-items: flex-start;
-
-        flex-direction: column;
-      }
-
-      .cta-actions {
-        align-items: flex-start;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .container {
-        width:
-          min(
-            calc(100% - 28px),
-            var(--container)
-          );
-      }
-
-      .section {
-        padding: 70px 0;
-      }
-
-      .hero-content h1 {
-        font-size:
-          clamp(
-            2.7rem,
-            13vw,
-            4.1rem
-          );
-      }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .button {
-        width: 100%;
-      }
-
-      .hero-visual {
-        min-height: 425px;
-      }
-
-      .avatar-neurado {
-        width: 150px;
-        height: 220px;
-      }
-
-      .avatar-neurado::after {
-        left: 18px;
-        right: 18px;
-        bottom: -42px;
-
-        height: 84px;
-      }
-
-      .avatar-betinho {
-        width: 158px;
-        height: 245px;
-      }
-
-      .boy-emoji {
-        font-size: 7.4rem;
-      }
-
-      .brain-emoji {
-        font-size: 6rem;
-      }
-
-      .character-glasses {
-        top: 82px;
-
-        font-size: 1.45rem;
-      }
-
-      .character-smile {
-        top: 118px;
-
-        font-size: 2rem;
-      }
-
-      .character-label {
-        min-width: 145px;
-
-        bottom: -44px;
-
-        padding: 9px 11px;
-      }
-
-      .speech-card-one {
-        top: 8px;
-        right: 6px;
-      }
-
-      .speech-card-two {
-        top: 90px;
-      }
-
-      .mini-card-left {
-        left: 0;
-        top: 142px;
-      }
-
-      .mini-card-right {
-        right: 0;
-        bottom: 85px;
-      }
-
-      .floating-chart,
-      .floating-target {
-        display: none;
-      }
-
-      .thought-grid,
-      .experience-grid,
-      .experts-grid,
-      .article-grid {
-        grid-template-columns:
-          1fr;
-      }
-
-      .article-card:last-child {
-        grid-column: auto;
-      }
-
-      .profile-card {
-        grid-template-columns:
-          1fr;
-      }
-
-      .profile-copy {
-        padding:
-          32px
-          28px
-          10px;
-      }
-
-      .profile-visual {
-        min-height: 235px;
-      }
-
-      .profile-mascot {
-        font-size: 7rem;
-      }
-
-      .journey-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
-      .footer-grid {
-        grid-template-columns:
-          1fr
-          1fr;
-      }
-
-      .footer-brand,
-      .footer-newsletter {
-        grid-column:
-          span 2;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 420px) {
-      .hero-content h1 {
-        font-size: 2.6rem;
-      }
-
-      .hero-visual {
-        min-height: 385px;
-      }
-
-      .avatar-neurado {
-        width: 132px;
-        height: 195px;
-      }
-
-      .avatar-betinho {
-        width: 140px;
-        height: 215px;
-      }
-
-      .character-label {
-        min-width: 130px;
-
-        font-size: 0.78rem;
-      }
-
-      .speech-card {
-        padding: 9px 11px;
-
-        font-size: 0.66rem;
-      }
-
-      .journey-grid {
-        grid-template-columns:
-          1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns:
-          1fr;
-      }
-
-      .footer-brand,
-      .footer-newsletter {
-        grid-column: auto;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration:
-          0.01ms !important;
-
-        animation-iteration-count:
-          1 !important;
-
-        transition-duration:
-          0.01ms !important;
-      }
-
-      .reveal {
-        opacity: 1;
-
-        transform: none;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header class="header" id="inicio">
-
-    <div class="container header-inner">
-
-      <a class="brand" href="#inicio">
-
-        <span class="brand-mark">
-          G
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <meta
+      name="description"
+      content="Grana na Real — educação financeira, comportamento e jogo responsável."
+    />
+
+    <title>Grana na Real</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/ibap-site/css/aposta.css" />
+
+    <script
+      src="https://unpkg.com/lucide@latest"
+      defer
+    ></script>
+
+    <script
+      src="/ibap-site/js/aposta.js"
+      defer
+    ></script>
+  </head>
+
+  <body>
+    <header class="header" id="inicio">
+      <div class="container header-inner">
+        <a
+          class="brand"
+          href="#inicio"
+          aria-label="Grana na Real - Página inicial"
+        >
+          <img
+            class="brand-logo"
+            src="ibap-site/assets/images/LogoIbapEAD.svg"
+            alt="Logo Grana na Real"
+          />
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav
+          class="main-nav"
+          id="main-nav"
+          aria-label="Navegação principal"
+        >
+          <a href="#inicio">Início</a>
+          
+      
+          <a href="#jornada">Jornada</a>
+          
+          <a href="#especialistas">Especialistas</a>
+          <a href="#blog">Conteúdos</a>
+        </nav>
+
+        <a class="header-cta" href="#comecar">
+          Começar agora
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-grid" aria-hidden="true"></div>
+
+        <span
+          class="floating-icon floating-coin"
+          aria-hidden="true"
+        >
+          <i data-lucide="circle-dollar-sign"></i>
         </span>
 
-        <span class="brand-text">
-          <strong>Grana</strong>
-          <small>na real</small>
+        <span
+          class="floating-icon floating-chart"
+          aria-hidden="true"
+        >
+          <i data-lucide="chart-no-axes-column-increasing"></i>
         </span>
 
-      </a>
+        <span
+          class="floating-icon floating-target"
+          aria-hidden="true"
+        >
+          <i data-lucide="target"></i>
+        </span>
 
-      <button
-        class="menu-toggle"
-        type="button"
-        aria-label="Abrir menu"
-        aria-expanded="false"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+        <div class="container hero-layout">
+          <div class="hero-content reveal reveal-left">
+            <span class="eyebrow eyebrow-light">
+              <i data-lucide="sparkles"></i>
+              Plataforma de Educação Financeira e Jogo Responsável.
+            </span>
 
-      <nav
-        class="main-nav"
-        aria-label="Navegação principal"
-      >
-        <a href="#inicio">Início</a>
-        <a href="#reflexao">Reflexões</a>
-        <a href="#personagens">Personagens</a>
-        <a href="#jornada">Jornada</a>
-        <a href="#experiencias">Experiências</a>
-        <a href="#especialistas">Especialistas</a>
-        <a href="#blog">Conteúdos</a>
-      </nav>
+            <h1>
+              Suas escolhas podem
+              <span>mudar o jogo.</span>
+            </h1>
 
-      <a class="header-cta" href="#comecar">
-        Começar agora
-        <i data-lucide="arrow-up-right"></i>
-      </a>
+            <p>
+              Entenda como dinheiro, emoções, marketing e apostas
+              influenciam suas decisões. Uma jornada prática, divertida e
+              feita para a vida real.
+            </p>
 
-    </div>
+            <div class="hero-actions">
+              <a class="button button-mint" href="#jornada">
+                Começar jornada
+                <i data-lucide="arrow-right"></i>
+              </a>
 
-  </header>
+            </div>
 
-  <main>
+            <div class="hero-points">
+              <span>
+                <i data-lucide="check"></i>
+                Gratuito
+              </span>
 
-    <section class="hero">
+              <span>
+                <i data-lucide="check"></i>
+                Interativo
+              </span>
 
-      <div
-        class="hero-grid"
-        aria-hidden="true"
-      ></div>
+              <span>
+                <i data-lucide="check"></i>
+                No seu ritmo
+              </span>
+            </div>
+          </div>
 
-      <span
-        class="floating-icon floating-coin"
-        aria-hidden="true"
-      >
-        <i data-lucide="circle-dollar-sign"></i>
-      </span>
+          <div
+            class="hero-visual reveal reveal-right"
+            aria-label="Personagens Neurado e Betinho"
+          >
+            <div class="character-glow"></div>
 
-      <span
-        class="floating-icon floating-chart"
-        aria-hidden="true"
-      >
-        <i data-lucide="chart-no-axes-column-increasing"></i>
-      </span>
+            <div class="speech-card speech-card-one">
+              Pensar antes também é uma escolha!
+            </div>
 
-      <span
-        class="floating-icon floating-target"
-        aria-hidden="true"
-      >
-        <i data-lucide="target"></i>
-      </span>
+            <div class="speech-card speech-card-two">
+              Será que agora vai?
+            </div>
 
-      <div class="container hero-layout">
+            <article class="character character-neurado">
+              <div class="character-avatar avatar-neurado">
+                <span class="brain-emoji">🧠</span>
+                <span class="character-glasses">◉ ◉</span>
+                <span class="character-smile">⌣</span>
+              </div>
 
-        <div class="hero-content reveal reveal-left">
+              <div class="character-label">
+                <strong>Nexo</strong>
+                <small>Pensa antes de agir</small>
+              </div>
+            </article>
 
-          <span class="eyebrow eyebrow-light">
-            <i data-lucide="sparkles"></i>
-            Aprender sobre dinheiro pode ser leve
-          </span>
+            <article class="character character-betinho">
+              <div class="character-avatar avatar-betinho">
+                <span class="boy-emoji">🧑🏻‍🦱</span>
+              </div>
 
-          <h1>
-            Escolhas inteligentes começam com
-            <span>conhecimento.</span>
-          </h1>
+              <div class="character-label">
+                <strong>Caio</strong>
+                <small>Confia muito na sorte</small>
+              </div>
+            </article>
 
-          <p>
-            Entenda como dinheiro, emoções, marketing e apostas
-            influenciam suas decisões. Uma jornada prática,
-            divertida e feita para a vida real.
-          </p>
+            <div class="hero-mini-card mini-card-left">
+              <i data-lucide="wallet-cards"></i>
+              Controle financeiro
+            </div>
 
-          <div class="hero-actions">
+            <div class="hero-mini-card mini-card-right">
+              <i data-lucide="trending-up"></i>
+              Apostas
+            </div>
+          </div>
+        </div>
 
-            <a
-              class="button button-mint"
-              href="#jornada"
+        <div class="hero-wave" aria-hidden="true"></div>
+      </section>
+
+      <section class="section section-soft" id="reflexao">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="eyebrow">
+              Pensamentos comuns, riscos reais
+            </span>
+
+            <h2>Você já pensou assim?</h2>
+
+            <p>
+              Algumas ideias parecem inofensivas, mas podem esconder
+              decisões impulsivas. Clique nos cards e reflita.
+            </p>
+          </div>
+
+          <div class="thought-grid">
+            <button
+              class="thought-card reveal"
+              type="button"
+              data-reflection="0"
             >
+              <span class="thought-icon thought-blue">
+                <i data-lucide="coins"></i>
+              </span>
+
+              <strong>“É só uma aposta...”</strong>
+
+              <p>
+                Começa pequena, parece simples e rapidamente pode virar
+                hábito.
+              </p>
+
+              <span class="thought-link">
+                Entender melhor
+                <i data-lucide="arrow-right"></i>
+              </span>
+            </button>
+
+            <button
+              class="thought-card reveal"
+              type="button"
+              data-reflection="1"
+            >
+              <span class="thought-icon thought-yellow">
+                <i data-lucide="rotate-ccw"></i>
+              </span>
+
+              <strong>“Hoje eu recupero.”</strong>
+
+              <p>
+                A vontade de compensar perdas costuma aumentar ainda mais
+                o risco.
+              </p>
+
+              <span class="thought-link">
+                Entender melhor
+                <i data-lucide="arrow-right"></i>
+              </span>
+            </button>
+
+            <button
+              class="thought-card reveal"
+              type="button"
+              data-reflection="2"
+            >
+              <span class="thought-icon thought-mint">
+                <i data-lucide="bar-chart-3"></i>
+              </span>
+
+              <strong>“Eu estudei tudo.”</strong>
+
+              <p>
+                Estatísticas ajudam, mas nunca eliminam o acaso e o
+                imprevisível.
+              </p>
+
+              <span class="thought-link">
+                Entender melhor
+                <i data-lucide="arrow-right"></i>
+              </span>
+            </button>
+
+            <button
+              class="thought-card reveal"
+              type="button"
+              data-reflection="3"
+            >
+              <span class="thought-icon thought-purple">
+                <i data-lucide="brain"></i>
+              </span>
+
+              <strong>“Depois eu resolvo.”</strong>
+
+              <p>
+                Adiar decisões financeiras costuma custar mais caro do que
+                parece.
+              </p>
+
+              <span class="thought-link">
+                Entender melhor
+                <i data-lucide="arrow-right"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="personagens">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="eyebrow">
+              Companheiros de jornada
+            </span>
+
+            <h2>Conheça nossos personagens</h2>
+
+            <p>
+              Eles representam dois jeitos diferentes de pensar e agir
+              diante do dinheiro.
+            </p>
+          </div>
+
+          <div class="characters-grid">
+            <article
+              class="profile-card profile-neurado reveal reveal-left"
+            >
+              <div class="profile-copy">
+                <span class="eyebrow eyebrow-light">
+                  Consciência
+                </span>
+
+                <h3>Neurado</h3>
+
+                <p>
+                  Observador, tranquilo e curioso. Ele ajuda a enxergar
+                  além da emoção e tomar decisões mais conscientes.
+                </p>
+
+                <ul>
+                  <li>
+                    <i data-lucide="check-circle-2"></i>
+                    Analisa antes de decidir
+                  </li>
+
+                  <li>
+                    <i data-lucide="check-circle-2"></i>
+                    Organiza objetivos
+                  </li>
+
+                  <li>
+                    <i data-lucide="check-circle-2"></i>
+                    Reconhece limites
+                  </li>
+                </ul>
+
+                <a href="#jornada">
+                  Conheça sua forma de pensar
+                  <i data-lucide="arrow-right"></i>
+                </a>
+              </div>
+
+              <div class="profile-visual">
+                <div class="profile-mascot">🧠</div>
+
+                <span
+                  class="profile-orbit profile-orbit-one"
+                ></span>
+
+                <span
+                  class="profile-orbit profile-orbit-two"
+                ></span>
+              </div>
+            </article>
+
+            <article
+              class="profile-card profile-betinho reveal reveal-right"
+            >
+              <div class="profile-copy">
+                <span class="eyebrow eyebrow-light">
+                  Impulso
+                </span>
+
+                <h3>Betinho</h3>
+
+                <p>
+                  Animado, espontâneo e cheio de confiança. Ele age rápido
+                  e acredita que a próxima tentativa muda tudo.
+                </p>
+
+                <ul>
+                  <li>
+                    <i data-lucide="zap"></i>
+                    Decide no calor do momento
+                  </li>
+
+                  <li>
+                    <i data-lucide="zap"></i>
+                    Confia na sorte
+                  </li>
+
+                  <li>
+                    <i data-lucide="zap"></i>
+                    Aprende com as consequências
+                  </li>
+                </ul>
+
+                <a href="#jornada">
+                  Acompanhe sua transformação
+                  <i data-lucide="arrow-right"></i>
+                </a>
+              </div>
+
+              <div class="profile-visual">
+                <div class="profile-mascot">🧑🏻‍🦱</div>
+
+                <span
+                  class="profile-orbit profile-orbit-one"
+                ></span>
+
+                <span
+                  class="profile-orbit profile-orbit-two"
+                ></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section journey-section" id="jornada">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="eyebrow eyebrow-light">
+              Aprendizado em etapas
+            </span>
+
+            <h2>Sua jornada</h2>
+
+            <p>
+              Conteúdos curtos, claros e conectados com situações reais.
+            </p>
+          </div>
+
+          <div class="journey-grid">
+            <article class="journey-step reveal">
+              <span class="journey-icon journey-green">
+                <i data-lucide="house"></i>
+              </span>
+
+              <strong>Dinheiro</strong>
+              <p>De onde vem e para onde vai.</p>
+            </article>
+
+            <article class="journey-step reveal">
+              <span class="journey-icon journey-yellow">
+                <i data-lucide="badge-dollar-sign"></i>
+              </span>
+
+              <strong>Desejos</strong>
+              <p>Vontade, prioridade e impulso.</p>
+            </article>
+
+            <article class="journey-step reveal">
+              <span class="journey-icon journey-blue">
+                <i data-lucide="megaphone"></i>
+              </span>
+
+              <strong>Marketing</strong>
+              <p>Como anúncios influenciam.</p>
+            </article>
+
+            <article class="journey-step reveal">
+              <span class="journey-icon journey-purple">
+                <i data-lucide="brain-circuit"></i>
+              </span>
+
+              <strong>Comportamento</strong>
+              <p>Emoção e recompensa.</p>
+            </article>
+
+            <article class="journey-step reveal">
+              <span class="journey-icon journey-navy">
+                <i data-lucide="gamepad-2"></i>
+              </span>
+
+              <strong>Jogo responsável</strong>
+              <p>Riscos e limites seguros.</p>
+            </article>
+
+            <article class="journey-step reveal">
+              <span class="journey-icon journey-coral">
+                <i data-lucide="landmark"></i>
+              </span>
+
+              <strong>Planejamento</strong>
+              <p>Metas realistas.</p>
+            </article>
+
+            <article class="journey-step reveal">
+              <span class="journey-icon journey-red">
+                <i data-lucide="heart-pulse"></i>
+              </span>
+
+              <strong>Saúde mental</strong>
+              <p>Bem-estar e estresse.</p>
+            </article>
+
+            <article class="journey-step reveal">
+              <span class="journey-icon journey-gold">
+                <i data-lucide="trophy"></i>
+              </span>
+
+              <strong>Novos hábitos</strong>
+              <p>Escolhas para o futuro.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="experiencias">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="eyebrow">
+              Aprenda fazendo
+            </span>
+
+            <h2>Experiências que você vai encontrar</h2>
+
+            <p>
+              Conteúdo leve, participativo e pensado para transformar
+              informação em prática.
+            </p>
+          </div>
+
+          <div class="experience-grid">
+            <article class="experience-card reveal">
+              <div class="experience-icon experience-navy">
+                <i data-lucide="video"></i>
+              </div>
+
+              <h3>Cenários interativos</h3>
+
+              <p>
+                Escolha caminhos e veja como cada decisão muda o resultado.
+              </p>
+
+              <a href="#comecar">
+                Explorar
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </article>
+
+            <article class="experience-card reveal">
+              <div class="experience-icon experience-purple">
+                <i data-lucide="message-circle-question"></i>
+              </div>
+
+              <h3>Quiz e desafios</h3>
+
+              <p>
+                Teste conhecimentos com feedbacks rápidos.
+              </p>
+
+              <a href="#comecar">
+                Explorar
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </article>
+
+            <article class="experience-card reveal">
+              <div class="experience-icon experience-green">
+                <i data-lucide="calculator"></i>
+              </div>
+
+              <h3>Calculadoras</h3>
+
+              <p>
+                Visualize gastos, metas e impactos das escolhas.
+              </p>
+
+              <a href="#comecar">
+                Explorar
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </article>
+
+            <article class="experience-card reveal">
+              <div class="experience-icon experience-orange">
+                <i data-lucide="user-round-search"></i>
+              </div>
+
+              <h3>Teste de perfil</h3>
+
+              <p>
+                Reflita sobre hábitos e possíveis sinais de risco.
+              </p>
+
+              <a href="#comecar">
+                Explorar
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </article>
+
+            <article class="experience-card reveal">
+              <div class="experience-icon experience-pink">
+                <i data-lucide="notebook-tabs"></i>
+              </div>
+
+              <h3>Exercícios práticos</h3>
+
+              <p>
+                Leve o aprendizado para o cotidiano.
+              </p>
+
+              <a href="#comecar">
+                Explorar
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section section-soft"
+        id="especialistas"
+      >
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="eyebrow">
+              Conteúdo com responsabilidade
+            </span>
+
+            <h2>
+              Especialistas que construíram essa jornada
+            </h2>
+
+            <p>
+              Experiência em comportamento, adicção e terapia
+              cognitivo-comportamental.
+            </p>
+          </div>
+
+          <div class="experts-grid">
+            <article class="expert-card reveal">
+              <img
+                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=85"
+                alt="Imagem ilustrativa de especialista"
+                loading="lazy"
+              />
+
+              <div>
+                <h3>Luciana Becker</h3>
+
+                <p>
+                  Psicóloga, especialista em transtornos adictivos.
+                </p>
+
+                <span>Psicologia • Adicção</span>
+              </div>
+            </article>
+
+            <article class="expert-card reveal">
+              <img
+                src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=600&q=85"
+                alt="Imagem ilustrativa de especialista"
+                loading="lazy"
+              />
+
+              <div>
+                <h3>Mariana Scelza</h3>
+
+                <p>
+                  Psicóloga, terapeuta e pesquisadora em psicologia da
+                  adicção.
+                </p>
+
+                <span>TCC • Dependência química</span>
+              </div>
+            </article>
+
+            <article class="expert-card reveal">
+              <img
+                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=85"
+                alt="Imagem ilustrativa de especialista"
+                loading="lazy"
+              />
+
+              <div>
+                <h3>Anna Lívia Magalhães</h3>
+
+                <p>
+                  Psicóloga com formação em entrevista motivacional.
+                </p>
+
+                <span>Entrevista motivacional • TCC</span>
+              </div>
+            </article>
+
+            <article class="expert-highlight reveal">
+              <i data-lucide="users"></i>
+
+              <strong>Conteúdo multidisciplinar</strong>
+
+              <p>
+                Conhecimento técnico traduzido para uma linguagem simples
+                e acolhedora.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="blog">
+        <div class="container">
+          <div class="section-heading reveal">
+            <span class="eyebrow">
+              Continue aprendendo
+            </span>
+
+            <h2>De nosso blog</h2>
+
+            <p>
+              Conteúdos rápidos para aprofundar os temas vistos na jornada.
+            </p>
+          </div>
+
+          <div class="article-grid">
+            <article class="article-card reveal">
+              <img
+                src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=900&q=85"
+                alt="Celular e cartões"
+                loading="lazy"
+              />
+
+              <div>
+                <span>Educação financeira</span>
+
+                <h3>
+                  O que significa ter controle sobre o dinheiro?
+                </h3>
+
+                <p>
+                  Organização não é deixar de viver, mas decidir melhor.
+                </p>
+
+                <a href="#comecar">
+                  Ler artigo
+                  <i data-lucide="arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <article class="article-card reveal">
+              <img
+                src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=900&q=85"
+                alt="Pessoa utilizando celular"
+                loading="lazy"
+              />
+
+              <div>
+                <span>Comportamento</span>
+
+                <h3>
+                  Por que a sensação de quase ganhar mexe tanto?
+                </h3>
+
+                <p>
+                  Expectativa, recompensa e emoção podem alimentar novas
+                  tentativas.
+                </p>
+
+                <a href="#comecar">
+                  Ler artigo
+                  <i data-lucide="arrow-right"></i>
+                </a>
+              </div>
+            </article>
+
+            <article class="article-card reveal">
+              <img
+                src="https://images.unsplash.com/photo-1542626991-cbc4e32524cc?auto=format&fit=crop&w=900&q=85"
+                alt="Pessoa escrevendo metas"
+                loading="lazy"
+              />
+
+              <div>
+                <span>Planejamento</span>
+
+                <h3>
+                  Metas realistas: da intenção para a mudança
+                </h3>
+
+                <p>
+                  Grandes objetivos podem virar pequenas decisões
+                  possíveis.
+                </p>
+
+                <a href="#comecar">
+                  Ler artigo
+                  <i data-lucide="arrow-right"></i>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <div class="section-center">
+            <a class="button button-outline" href="#comecar">
+              Ver todos os conteúdos
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="comecar">
+        <div class="container cta-layout">
+          <div class="cta-copy reveal reveal-left">
+            <span class="eyebrow eyebrow-light">
+              Seu próximo passo
+            </span>
+
+            <h2>
+              Pronto para começar sua transformação?
+            </h2>
+
+            <p>
+              Aprenda a cuidar melhor do dinheiro, das emoções e das
+              escolhas.
+            </p>
+          </div>
+
+          <div class="cta-actions reveal reveal-right">
+            <a class="button button-yellow" href="#">
               Começar jornada
               <i data-lucide="arrow-right"></i>
             </a>
 
-            <a
-              class="button button-ghost"
-              href="#reflexao"
-            >
-              Saiba como funciona
-            </a>
-
-          </div>
-
-          <div class="hero-points">
-
             <span>
-              <i data-lucide="check"></i>
-              Gratuito
+              <i data-lucide="shield-check"></i>
+              Ambiente seguro e gratuito
             </span>
-
-            <span>
-              <i data-lucide="check"></i>
-              Interativo
-            </span>
-
-            <span>
-              <i data-lucide="check"></i>
-              No seu ritmo
-            </span>
-
           </div>
-
         </div>
-
-        <div
-          class="hero-visual reveal reveal-right"
-          aria-label="Personagens Neurado e Betinho"
-        >
-
-          <div class="character-glow"></div>
-
-          <div class="speech-card speech-card-one">
-            Planejar ajuda a escolher melhor!
-          </div>
-
-          <div class="speech-card speech-card-two">
-            Será que agora vai?
-          </div>
-
-          <article class="character character-neurado">
-
-            <div class="character-avatar avatar-neurado">
-
-              <span class="brain-emoji">
-                🧠
-              </span>
-
-              <span class="character-glasses">
-                ◉ ◉
-              </span>
-
-              <span class="character-smile">
-                ⌣
-              </span>
-
-            </div>
-
-            <div class="character-label">
-              <strong>Neurado</strong>
-              <small>Pensa antes de agir</small>
-            </div>
-
-          </article>
-
-          <article class="character character-betinho">
-
-            <div class="character-avatar avatar-betinho">
-              <span class="boy-emoji">
-                🧑🏻‍🦱
-              </span>
-            </div>
-
-            <div class="character-label">
-              <strong>Betinho</strong>
-              <small>Confia muito na sorte</small>
-            </div>
-
-          </article>
-
-          <div class="hero-mini-card mini-card-left">
-            <i data-lucide="wallet-cards"></i>
-            Controle financeiro
-          </div>
-
-          <div class="hero-mini-card mini-card-right">
-            <i data-lucide="trending-up"></i>
-            Metas possíveis
-          </div>
-
-        </div>
-
-      </div>
-
-      <div
-        class="hero-wave"
-        aria-hidden="true"
-      ></div>
-
-    </section>
-
-    <section
-      class="section section-soft"
-      id="reflexao"
-    >
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-
-          <span class="eyebrow">
-            Pequenas frases, grandes sinais
-          </span>
-
-          <h2>
-            Você já pensou por isso?
-          </h2>
-
-          <p>
-            Algumas ideias parecem inofensivas, mas podem
-            esconder decisões impulsivas. Clique nos cards e reflita.
-          </p>
-
-        </div>
-
-        <div class="thought-grid">
-
-          <button
-            class="thought-card reveal"
-            type="button"
-          >
-
-            <span class="thought-icon thought-blue">
-              <i data-lucide="coins"></i>
-            </span>
-
-            <strong>
-              “É só uma aposta...”
-            </strong>
-
-            <p>
-              Começa pequena, parece simples e rapidamente
-              pode virar hábito.
-            </p>
-
-            <span class="thought-link">
-              Entender melhor
-              <i data-lucide="arrow-right"></i>
-            </span>
-
-          </button>
-
-          <button
-            class="thought-card reveal"
-            type="button"
-          >
-
-            <span class="thought-icon thought-yellow">
-              <i data-lucide="rotate-ccw"></i>
-            </span>
-
-            <strong>
-              “Hoje eu recupero.”
-            </strong>
-
-            <p>
-              A vontade de compensar perdas costuma aumentar
-              ainda mais o risco.
-            </p>
-
-            <span class="thought-link">
-              Entender melhor
-              <i data-lucide="arrow-right"></i>
-            </span>
-
-          </button>
-
-          <button
-            class="thought-card reveal"
-            type="button"
-          >
-
-            <span class="thought-icon thought-mint">
-              <i data-lucide="bar-chart-3"></i>
-            </span>
-
-            <strong>
-              “Eu estudei tudo.”
-            </strong>
-
-            <p>
-              Estatísticas ajudam, mas nunca eliminam
-              o acaso e o imprevisível.
-            </p>
-
-            <span class="thought-link">
-              Entender melhor
-              <i data-lucide="arrow-right"></i>
-            </span>
-
-          </button>
-
-          <button
-            class="thought-card reveal"
-            type="button"
-          >
-
-            <span class="thought-icon thought-purple">
-              <i data-lucide="brain"></i>
-            </span>
-
-            <strong>
-              “Depois eu resolvo.”
-            </strong>
-
-            <p>
-              Adiar decisões financeiras costuma custar
-              mais caro do que parece.
-            </p>
-
-            <span class="thought-link">
-              Entender melhor
-              <i data-lucide="arrow-right"></i>
-            </span>
-
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section
-      class="section"
-      id="personagens"
-    >
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-
-          <span class="eyebrow">
-            Companheiros de jornada
-          </span>
-
-          <h2>
-            Conheça nossos personagens
-          </h2>
-
-          <p>
-            Eles representam dois jeitos diferentes de pensar
-            e agir diante do dinheiro.
-          </p>
-
-        </div>
-
-        <div class="characters-grid">
-
-          <article class="profile-card profile-neurado reveal reveal-left">
-
-            <div class="profile-copy">
-
-              <span class="eyebrow eyebrow-light">
-                Consciência
-              </span>
-
-              <h3>Neurado</h3>
-
-              <p>
-                Observador, tranquilo e curioso. Ele ajuda a
-                enxergar além da emoção e tomar decisões mais conscientes.
-              </p>
-
-              <ul>
-                <li>
-                  <i data-lucide="check-circle-2"></i>
-                  Analisa antes de decidir
-                </li>
-
-                <li>
-                  <i data-lucide="check-circle-2"></i>
-                  Organiza objetivos
-                </li>
-
-                <li>
-                  <i data-lucide="check-circle-2"></i>
-                  Reconhece limites
-                </li>
-              </ul>
-
-              <a href="#jornada">
-                Conheça sua forma de pensar
-                <i data-lucide="arrow-right"></i>
-              </a>
-
-            </div>
-
-            <div class="profile-visual">
-
-              <div class="profile-mascot">
-                🧠
-              </div>
-
-              <span class="profile-orbit profile-orbit-one"></span>
-              <span class="profile-orbit profile-orbit-two"></span>
-
-            </div>
-
-          </article>
-
-          <article class="profile-card profile-betinho reveal reveal-right">
-
-            <div class="profile-copy">
-
-              <span class="eyebrow eyebrow-light">
-                Impulso
-              </span>
-
-              <h3>Betinho</h3>
-
-              <p>
-                Animado, espontâneo e cheio de confiança.
-                Ele age rápido e acredita que a próxima tentativa muda tudo.
-              </p>
-
-              <ul>
-                <li>
-                  <i data-lucide="zap"></i>
-                  Decide no calor do momento
-                </li>
-
-                <li>
-                  <i data-lucide="zap"></i>
-                  Confia na sorte
-                </li>
-
-                <li>
-                  <i data-lucide="zap"></i>
-                  Aprende com as consequências
-                </li>
-              </ul>
-
-              <a href="#jornada">
-                Acompanhe sua transformação
-                <i data-lucide="arrow-right"></i>
-              </a>
-
-            </div>
-
-            <div class="profile-visual">
-
-              <div class="profile-mascot">
-                🧑🏻‍🦱
-              </div>
-
-              <span class="profile-orbit profile-orbit-one"></span>
-              <span class="profile-orbit profile-orbit-two"></span>
-
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section
-      class="section journey-section"
-      id="jornada"
-    >
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-
-          <span class="eyebrow eyebrow-light">
-            Aprendizado em etapas
-          </span>
-
-          <h2>Sua jornada</h2>
-
-          <p>
-            Conteúdos curtos, claros e conectados
-            com situações reais.
-          </p>
-
-        </div>
-
-        <div class="journey-grid">
-
-          <article class="journey-step reveal">
-            <span class="journey-icon journey-green">
-              <i data-lucide="house"></i>
-            </span>
-            <strong>Dinheiro</strong>
-            <p>De onde vem e para onde vai.</p>
-          </article>
-
-          <article class="journey-step reveal">
-            <span class="journey-icon journey-yellow">
-              <i data-lucide="badge-dollar-sign"></i>
-            </span>
-            <strong>Desejos</strong>
-            <p>Vontade, prioridade e impulso.</p>
-          </article>
-
-          <article class="journey-step reveal">
-            <span class="journey-icon journey-blue">
-              <i data-lucide="megaphone"></i>
-            </span>
-            <strong>Marketing</strong>
-            <p>Como anúncios influenciam.</p>
-          </article>
-
-          <article class="journey-step reveal">
-            <span class="journey-icon journey-purple">
-              <i data-lucide="brain-circuit"></i>
-            </span>
-            <strong>Comportamento</strong>
-            <p>Emoção e recompensa.</p>
-          </article>
-
-          <article class="journey-step reveal">
-            <span class="journey-icon journey-navy">
-              <i data-lucide="gamepad-2"></i>
-            </span>
-            <strong>Jogo responsável</strong>
-            <p>Riscos e limites seguros.</p>
-          </article>
-
-          <article class="journey-step reveal">
-            <span class="journey-icon journey-coral">
-              <i data-lucide="landmark"></i>
-            </span>
-            <strong>Planejamento</strong>
-            <p>Metas realistas.</p>
-          </article>
-
-          <article class="journey-step reveal">
-            <span class="journey-icon journey-red">
-              <i data-lucide="heart-pulse"></i>
-            </span>
-            <strong>Saúde mental</strong>
-            <p>Bem-estar e estresse.</p>
-          </article>
-
-          <article class="journey-step reveal">
-            <span class="journey-icon journey-gold">
-              <i data-lucide="trophy"></i>
-            </span>
-            <strong>Novos hábitos</strong>
-            <p>Escolhas para o futuro.</p>
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section
-      class="section"
-      id="experiencias"
-    >
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-
-          <span class="eyebrow">
-            Aprenda fazendo
-          </span>
-
-          <h2>
-            Experiências que você vai encontrar
-          </h2>
-
-          <p>
-            Conteúdo leve, participativo e pensado para transformar
-            informação em prática.
-          </p>
-
-        </div>
-
-        <div class="experience-grid">
-
-          <article class="experience-card reveal">
-
-            <div class="experience-icon experience-navy">
-              <i data-lucide="video"></i>
-            </div>
-
-            <h3>Cenários interativos</h3>
-
-            <p>
-              Escolha caminhos e veja como cada decisão muda o resultado.
-            </p>
-
-            <a href="#comecar">
-              Explorar
-              <i data-lucide="arrow-right"></i>
-            </a>
-
-          </article>
-
-          <article class="experience-card reveal">
-
-            <div class="experience-icon experience-purple">
-              <i data-lucide="message-circle-question"></i>
-            </div>
-
-            <h3>Quiz e desafios</h3>
-
-            <p>
-              Teste conhecimentos com feedbacks rápidos.
-            </p>
-
-            <a href="#comecar">
-              Explorar
-              <i data-lucide="arrow-right"></i>
-            </a>
-
-          </article>
-
-          <article class="experience-card reveal">
-
-            <div class="experience-icon experience-green">
-              <i data-lucide="calculator"></i>
-            </div>
-
-            <h3>Calculadoras</h3>
-
-            <p>
-              Visualize gastos, metas e impactos das escolhas.
-            </p>
-
-            <a href="#comecar">
-              Explorar
-              <i data-lucide="arrow-right"></i>
-            </a>
-
-          </article>
-
-          <article class="experience-card reveal">
-
-            <div class="experience-icon experience-orange">
-              <i data-lucide="user-round-search"></i>
-            </div>
-
-            <h3>Teste de perfil</h3>
-
-            <p>
-              Reflita sobre hábitos e possíveis sinais de risco.
-            </p>
-
-            <a href="#comecar">
-              Explorar
-              <i data-lucide="arrow-right"></i>
-            </a>
-
-          </article>
-
-          <article class="experience-card reveal">
-
-            <div class="experience-icon experience-pink">
-              <i data-lucide="notebook-tabs"></i>
-            </div>
-
-            <h3>Exercícios práticos</h3>
-
-            <p>
-              Leve o aprendizado para o cotidiano.
-            </p>
-
-            <a href="#comecar">
-              Explorar
-              <i data-lucide="arrow-right"></i>
-            </a>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section
-      class="section section-soft"
-      id="especialistas"
-    >
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-
-          <span class="eyebrow">
-            Conteúdo com responsabilidade
-          </span>
-
-          <h2>
-            Especialistas que construíram essa jornada
-          </h2>
-
-          <p>
-            Experiência em comportamento, adicção e
-            terapia cognitivo-comportamental.
-          </p>
-
-        </div>
-
-        <div class="experts-grid">
-
-          <article class="expert-card reveal">
-
-            <img
-              src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=85"
-              alt="Imagem ilustrativa de especialista"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Luciana Becker</h3>
-
-              <p>
-                Psicóloga, especialista em transtornos adictivos.
-              </p>
-
-              <span>
-                Psicologia • Adicção
-              </span>
-            </div>
-
-          </article>
-
-          <article class="expert-card reveal">
-
-            <img
-              src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=600&q=85"
-              alt="Imagem ilustrativa de especialista"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Mariana Scelza</h3>
-
-              <p>
-                Psicóloga, terapeuta e pesquisadora em
-                psicologia da adicção.
-              </p>
-
-              <span>
-                TCC • Dependência química
-              </span>
-            </div>
-
-          </article>
-
-          <article class="expert-card reveal">
-
-            <img
-              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=85"
-              alt="Imagem ilustrativa de especialista"
-              loading="lazy"
-            >
-
-            <div>
-              <h3>Anna Lívia Magalhães</h3>
-
-              <p>
-                Psicóloga com formação em entrevista motivacional.
-              </p>
-
-              <span>
-                Entrevista motivacional • TCC
-              </span>
-            </div>
-
-          </article>
-
-          <article class="expert-highlight reveal">
-
-            <i data-lucide="users"></i>
-
-            <strong>
-              Conteúdo multidisciplinar
-            </strong>
-
-            <p>
-              Conhecimento técnico traduzido para uma linguagem
-              simples e acolhedora.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section
-      class="section"
-      id="blog"
-    >
-
-      <div class="container">
-
-        <div class="section-heading reveal">
-
-          <span class="eyebrow">
-            Continue aprendendo
-          </span>
-
-          <h2>De nosso blog</h2>
-
-          <p>
-            Conteúdos rápidos para aprofundar os temas
-            vistos na jornada.
-          </p>
-
-        </div>
-
-        <div class="article-grid">
-
-          <article class="article-card reveal">
-
-            <img
-              src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=900&q=85"
-              alt="Celular e cartões"
-              loading="lazy"
-            >
-
-            <div>
-
-              <span>
-                Educação financeira
-              </span>
-
-              <h3>
-                O que significa ter controle sobre o dinheiro?
-              </h3>
-
-              <p>
-                Organização não é deixar de viver, mas decidir melhor.
-              </p>
-
-              <a href="#comecar">
-                Ler artigo
-                <i data-lucide="arrow-right"></i>
-              </a>
-
-            </div>
-
-          </article>
-
-          <article class="article-card reveal">
-
-            <img
-              src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=900&q=85"
-              alt="Pessoa utilizando celular"
-              loading="lazy"
-            >
-
-            <div>
-
-              <span>
-                Comportamento
-              </span>
-
-              <h3>
-                Por que a sensação de quase ganhar mexe tanto?
-              </h3>
-
-              <p>
-                Expectativa, recompensa e emoção podem
-                alimentar novas tentativas.
-              </p>
-
-              <a href="#comecar">
-                Ler artigo
-                <i data-lucide="arrow-right"></i>
-              </a>
-
-            </div>
-
-          </article>
-
-          <article class="article-card reveal">
-
-            <img
-              src="https://images.unsplash.com/photo-1542626991-cbc4e32524cc?auto=format&fit=crop&w=900&q=85"
-              alt="Pessoa escrevendo metas"
-              loading="lazy"
-            >
-
-            <div>
-
-              <span>
-                Planejamento
-              </span>
-
-              <h3>
-                Metas realistas: da intenção para a mudança
-              </h3>
-
-              <p>
-                Grandes objetivos podem virar pequenas
-                decisões possíveis.
-              </p>
-
-              <a href="#comecar">
-                Ler artigo
-                <i data-lucide="arrow-right"></i>
-              </a>
-
-            </div>
-
-          </article>
-
-        </div>
-
-        <div class="section-center">
-
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
           <a
-            class="button button-outline"
-            href="#comecar"
+            class="brand"
+            href="#inicio"
+            aria-label="Grana na Real - Página inicial"
           >
-            Ver todos os conteúdos
-            <i data-lucide="arrow-right"></i>
+            <img
+              class="brand-logo footer-brand-logo"
+              src="./assets/images/LogoIbapEAD.svg"
+              alt="Logo Grana na Real"
+            />
           </a>
 
+          <p>
+            Educação financeira, comportamento e jogo responsável em uma
+            linguagem simples.
+          </p>
         </div>
 
-      </div>
+        <div>
+          <h3>Navegação</h3>
 
-    </section>
+          <a href="#reflexao">Reflexões</a>
+          <a href="#personagens">Personagens</a>
+          <a href="#jornada">Jornada</a>
+          <a href="#experiencias">Experiências</a>
+        </div>
 
-    <section
-      class="cta-section"
-      id="comecar"
-    >
+        <div>
+          <h3>Conteúdos</h3>
 
-      <div class="container cta-layout">
+          <a href="#especialistas">Especialistas</a>
+          <a href="#blog">Blog</a>
+          <a href="#comecar">Teste de perfil</a>
+          <a href="#comecar">Glossário</a>
+        </div>
 
-        <div class="cta-copy reveal reveal-left">
+        <div>
+          <h3>Institucional</h3>
 
-          <span class="eyebrow eyebrow-light">
-            Seu próximo passo
-          </span>
+          <a href="#">Sobre o projeto</a>
+          <a href="#">Privacidade</a>
+          <a href="#">Termos de uso</a>
+          <a href="#">Contato</a>
+        </div>
 
-          <h2>
-            Pronto para começar sua transformação?
-          </h2>
+        <div class="footer-newsletter">
+          <h3>Receba novidades</h3>
 
           <p>
-            Aprenda a cuidar melhor do dinheiro,
-            das emoções e das escolhas.
+            Conteúdos novos direto no seu e-mail.
           </p>
 
+          <form class="newsletter-form">
+            <label
+              class="sr-only"
+              for="newsletter-email"
+            >
+              Seu e-mail
+            </label>
+
+            <input
+              id="newsletter-email"
+              type="email"
+              placeholder="seu@email.com"
+              required
+            />
+
+            <button
+              type="submit"
+              aria-label="Cadastrar e-mail"
+            >
+              <i data-lucide="send"></i>
+            </button>
+          </form>
         </div>
-
-        <div class="cta-actions reveal reveal-right">
-
-          <a
-            class="button button-yellow"
-            href="#"
-          >
-            Começar jornada
-            <i data-lucide="arrow-right"></i>
-          </a>
-
-          <span>
-            <i data-lucide="shield-check"></i>
-            Ambiente seguro e gratuito
-          </span>
-
-        </div>
-
       </div>
 
-    </section>
+      <div class="container footer-bottom">
+        <span>
+          © <span id="current-year"></span>
+          Grana na Real.
+        </span>
 
-  </main>
-
-  <footer class="footer">
-
-    <div class="container footer-grid">
-
-      <div class="footer-brand">
-
-        <a class="brand" href="#inicio">
-
-          <span class="brand-mark">
-            G
-          </span>
-
-          <span class="brand-text">
-            <strong>Grana</strong>
-            <small>na real</small>
-          </span>
-
-        </a>
-
-        <p>
-          Educação financeira, comportamento e jogo responsável
-          em uma linguagem simples.
-        </p>
-
+        <span>
+          Uma iniciativa de educação e conscientização.
+        </span>
       </div>
+    </footer>
 
-      <div>
+    <dialog
+      class="reflection-modal"
+      id="reflection-modal"
+    >
+      <button
+        class="modal-close"
+        type="button"
+        aria-label="Fechar"
+      >
+        <i data-lucide="x"></i>
+      </button>
 
-        <h3>Navegação</h3>
-
-        <a href="#reflexao">Reflexões</a>
-        <a href="#personagens">Personagens</a>
-        <a href="#jornada">Jornada</a>
-        <a href="#experiencias">Experiências</a>
-
-      </div>
-
-      <div>
-
-        <h3>Conteúdos</h3>
-
-        <a href="#especialistas">Especialistas</a>
-        <a href="#blog">Blog</a>
-        <a href="#comecar">Teste de perfil</a>
-        <a href="#comecar">Glossário</a>
-
-      </div>
-
-      <div>
-
-        <h3>Institucional</h3>
-
-        <a href="#">Sobre o projeto</a>
-        <a href="#">Privacidade</a>
-        <a href="#">Termos de uso</a>
-        <a href="#">Contato</a>
-
-      </div>
-
-      <div class="footer-newsletter">
-
-        <h3>Receba novidades</h3>
-
-        <p>
-          Conteúdos novos direto no seu e-mail.
-        </p>
-
-        <form class="newsletter-form">
-
-          <label
-            class="sr-only"
-            for="newsletter-email"
-          >
-            Seu e-mail
-          </label>
-
-          <input
-            id="newsletter-email"
-            type="email"
-            placeholder="seu@email.com"
-            required
-          >
-
-          <button
-            type="submit"
-            aria-label="Cadastrar e-mail"
-          >
-            <i data-lucide="send"></i>
-          </button>
-
-        </form>
-
-      </div>
-
-    </div>
-
-    <div class="container footer-bottom">
-
-      <span>
-        © <span id="current-year"></span>
-        Grana na Real.
+      <span class="modal-icon">
+        <i data-lucide="lightbulb"></i>
       </span>
 
-      <span>
-        Uma iniciativa de educação e conscientização.
-      </span>
+      <h2>Vale a pena refletir</h2>
 
-    </div>
+      <p id="modal-text">
+        Pequenas frases podem mostrar como emoção e impulso influenciam
+        decisões.
+      </p>
 
-  </footer>
-
-  <dialog
-    class="reflection-modal"
-    id="reflection-modal"
-  >
-
-    <button
-      class="modal-close"
-      type="button"
-      aria-label="Fechar"
-    >
-      <i data-lucide="x"></i>
-    </button>
-
-    <span class="modal-icon">
-      <i data-lucide="lightbulb"></i>
-    </span>
-
-    <h2>
-      Vale a pena refletir
-    </h2>
-
-    <p id="modal-text">
-      Pequenas frases podem mostrar como emoção
-      e impulso influenciam decisões.
-    </p>
-
-    <button
-      class="button button-mint modal-button"
-      type="button"
-    >
-      Entendi
-    </button>
-
-  </dialog>
-
-  <script>
-    const menuToggle =
-      document.querySelector(".menu-toggle");
-
-    const mainNav =
-      document.querySelector(".main-nav");
-
-    const navigationLinks =
-      document.querySelectorAll(".main-nav a");
-
-    menuToggle.addEventListener("click", () => {
-      const isOpen =
-        mainNav.classList.toggle("open");
-
-      document.body.classList.toggle(
-        "menu-open",
-        isOpen
-      );
-
-      menuToggle.setAttribute(
-        "aria-expanded",
-        String(isOpen)
-      );
-
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen
-          ? "Fechar menu"
-          : "Abrir menu"
-      );
-    });
-
-    navigationLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        mainNav.classList.remove("open");
-
-        document.body.classList.remove(
-          "menu-open"
-        );
-
-        menuToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-      });
-    });
-
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) {
-              return;
-            }
-
-            entry.target.classList.add(
-              "visible"
-            );
-
-            observer.unobserve(
-              entry.target
-            );
-          });
-        },
-        {
-          threshold: 0.14,
-          rootMargin:
-            "0px 0px -40px"
-        }
-      );
-
-    document
-      .querySelectorAll(".reveal")
-      .forEach((element) => {
-        revealObserver.observe(element);
-      });
-
-    const pageSections =
-      document.querySelectorAll(
-        "main section[id]"
-      );
-
-    const navigationObserver =
-      new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) {
-              return;
-            }
-
-            navigationLinks.forEach(
-              (link) => {
-                const destination =
-                  link.getAttribute("href");
-
-                link.classList.toggle(
-                  "active",
-                  destination ===
-                    `#${entry.target.id}`
-                );
-              }
-            );
-          });
-        },
-        {
-          rootMargin:
-            "-40% 0px -52%"
-        }
-      );
-
-    pageSections.forEach((section) => {
-      navigationObserver.observe(section);
-    });
-
-    const reflectionTexts = [
-      "Quando algo começa pequeno, é fácil imaginar que sempre estará sob controle. Observar frequência e impacto ajuda a perceber mudanças.",
-
-      "A vontade de recuperar uma perda pode gerar novas decisões impulsivas. Parar e estabelecer um limite é uma forma de proteção.",
-
-      "Conhecimento não elimina o acaso. Mesmo com estatísticas, existem fatores imprevisíveis que mudam qualquer resultado.",
-
-      "Adiar decisões financeiras pode aumentar ansiedade e custos. Pequenos passos agora costumam ser melhores que grandes promessas depois."
-    ];
-
-    const reflectionModal =
-      document.querySelector(
-        "#reflection-modal"
-      );
-
-    const modalText =
-      document.querySelector(
-        "#modal-text"
-      );
-
-    const thoughtCards =
-      document.querySelectorAll(
-        ".thought-card"
-      );
-
-    thoughtCards.forEach(
-      (card, index) => {
-        card.addEventListener(
-          "click",
-          () => {
-            modalText.textContent =
-              reflectionTexts[index];
-
-            reflectionModal.showModal();
-          }
-        );
-      }
-    );
-
-    const closeModalButton =
-      document.querySelector(
-        ".modal-close"
-      );
-
-    const confirmModalButton =
-      document.querySelector(
-        ".modal-button"
-      );
-
-    closeModalButton.addEventListener(
-      "click",
-      () => {
-        reflectionModal.close();
-      }
-    );
-
-    confirmModalButton.addEventListener(
-      "click",
-      () => {
-        reflectionModal.close();
-      }
-    );
-
-    reflectionModal.addEventListener(
-      "click",
-      (event) => {
-        const modalPosition =
-          reflectionModal
-            .getBoundingClientRect();
-
-        const clickedOutside =
-          event.clientX <
-            modalPosition.left ||
-          event.clientX >
-            modalPosition.right ||
-          event.clientY <
-            modalPosition.top ||
-          event.clientY >
-            modalPosition.bottom;
-
-        if (clickedOutside) {
-          reflectionModal.close();
-        }
-      }
-    );
-
-    const newsletterForm =
-      document.querySelector(
-        ".newsletter-form"
-      );
-
-    newsletterForm.addEventListener(
-      "submit",
-      (event) => {
-        event.preventDefault();
-
-        const input =
-          newsletterForm.querySelector(
-            "input"
-          );
-
-        const button =
-          newsletterForm.querySelector(
-            "button"
-          );
-
-        input.value = "";
-
-        input.placeholder =
-          "Cadastro realizado!";
-
-        button.innerHTML =
-          '<i data-lucide="check"></i>';
-
-        lucide.createIcons();
-      }
-    );
-
-    document.querySelector(
-      "#current-year"
-    ).textContent =
-      new Date().getFullYear();
-
-    lucide.createIcons();
-  </script>
-
-</body>
+      <button
+        class="button button-mint modal-button"
+        type="button"
+      >
+        Entendi
+      </button>
+    </dialog>
+  </body>
 </html>
