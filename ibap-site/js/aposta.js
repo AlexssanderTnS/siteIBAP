@@ -101,107 +101,60 @@ if ("IntersectionObserver" in window) {
   });
 }
 
-/* MODAL DE REFLEXÃO */
+/* ==================================================
+   CARDS DE REFLEXÃO COM FLIP
+================================================== */
 
-const reflectionTexts = [
-  "Quando algo começa pequeno, é fácil imaginar que sempre estará sob controle. Observar frequência e impacto ajuda a perceber mudanças.",
+const thoughtCards =
+  document.querySelectorAll(
+    ".thought-card.flip-card"
+  );
 
-  "A vontade de recuperar uma perda pode gerar novas decisões impulsivas. Parar e estabelecer um limite é uma forma de proteção.",
+function setThoughtCardState(
+  card,
+  isFlipped
+) {
+  card.classList.toggle(
+    "is-flipped",
+    isFlipped
+  );
 
-  "Conhecimento não elimina o acaso. Mesmo com estatísticas, existem fatores imprevisíveis que mudam qualquer resultado.",
-
-  "Adiar decisões financeiras pode aumentar ansiedade e custos. Pequenos passos agora costumam ser melhores que grandes promessas depois."
-];
-
-const reflectionModal = document.querySelector(
-  "#reflection-modal"
-);
-
-const modalText = document.querySelector("#modal-text");
-
-const thoughtCards = document.querySelectorAll(
-  ".thought-card"
-);
-
-const closeModalButton = document.querySelector(
-  ".modal-close"
-);
-
-const confirmModalButton = document.querySelector(
-  ".modal-button"
-);
-
-function openReflectionModal(index) {
-  if (!reflectionModal || !modalText) {
-    return;
-  }
-
-  modalText.textContent =
-    reflectionTexts[index] || reflectionTexts[0];
-
-  if (typeof reflectionModal.showModal === "function") {
-    reflectionModal.showModal();
-  } else {
-    reflectionModal.setAttribute("open", "");
-  }
+  card.setAttribute(
+    "aria-pressed",
+    String(isFlipped)
+  );
 }
 
-function closeReflectionModal() {
-  if (!reflectionModal) {
-    return;
-  }
+function closeOtherThoughtCards(
+  selectedCard
+) {
+  thoughtCards.forEach((card) => {
+    if (card === selectedCard) {
+      return;
+    }
 
-  if (
-    typeof reflectionModal.close === "function" &&
-    reflectionModal.open
-  ) {
-    reflectionModal.close();
-  } else {
-    reflectionModal.removeAttribute("open");
-  }
-}
-
-thoughtCards.forEach((card, index) => {
-  card.addEventListener("click", () => {
-    const reflectionIndex = Number(
-      card.dataset.reflection ?? index
+    setThoughtCardState(
+      card,
+      false
     );
+  });
+}
 
-    openReflectionModal(reflectionIndex);
+thoughtCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    const willFlip =
+      !card.classList.contains(
+        "is-flipped"
+      );
+
+    closeOtherThoughtCards(card);
+
+    setThoughtCardState(
+      card,
+      willFlip
+    );
   });
 });
-
-closeModalButton?.addEventListener(
-  "click",
-  closeReflectionModal
-);
-
-confirmModalButton?.addEventListener(
-  "click",
-  closeReflectionModal
-);
-
-reflectionModal?.addEventListener("click", (event) => {
-  const modalPosition =
-    reflectionModal.getBoundingClientRect();
-
-  const clickedOutside =
-    event.clientX < modalPosition.left ||
-    event.clientX > modalPosition.right ||
-    event.clientY < modalPosition.top ||
-    event.clientY > modalPosition.bottom;
-
-  if (clickedOutside) {
-    closeReflectionModal();
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeReflectionModal();
-  }
-});
-
 /* NEWSLETTER DEMONSTRATIVA */
 
 const newsletterForm = document.querySelector(

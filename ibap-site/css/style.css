@@ -1265,7 +1265,7 @@
 .clients-track-left {
   animation:
     clients-scroll-left
-    30s
+    100s
     linear
     infinite;
 }
@@ -1285,7 +1285,7 @@
 
   flex-shrink: 0;
 
-  padding:50px;
+  padding:30px;
 
   overflow: hidden;
 
