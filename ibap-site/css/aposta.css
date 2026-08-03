@@ -21,6 +21,15 @@
   --shadow-soft: 0 12px 30px rgba(13, 38, 76, 0.08);
   --radius: 24px;
   --container: 1160px;
+
+  /* Compatibilidade com os componentes adicionados */
+  --text: var(--ink);
+  --text-soft: var(--muted);
+  --border: var(--line);
+  --radius-medium: var(--radius);
+  --shadow-small: var(--shadow-soft);
+  --shadow-large: var(--shadow);
+  --blue-700: var(--blue);
 }
 
 * {
@@ -169,7 +178,7 @@ svg {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(196, 212, 231, 0.95);
+  background: #ffffff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
 }
@@ -189,7 +198,7 @@ svg {
 
 .brand-logo {
   width: auto;
-  height: 52px;
+  height: 42px;
   max-width: 210px;
   object-fit: contain;
   transition:
@@ -412,14 +421,18 @@ svg {
 
 .character-avatar {
   position: relative;
+  isolation: isolate;
   display: grid;
-  place-items: center;
+  place-items: end center;
+  overflow: hidden;
   filter: drop-shadow(0 26px 30px rgba(0, 0, 0, 0.24));
 }
 
+/* FUNDO / MOLDURA DO NEXO */
 .avatar-neurado {
   width: 245px;
   height: 315px;
+  padding: 16px 10px 0;
   border-radius: 44% 44% 38% 38% / 34% 34% 52% 52%;
   background:
     radial-gradient(circle at 36% 22%, #7bf4ef, transparent 12%),
@@ -435,46 +448,54 @@ svg {
   right: 28px;
   bottom: -54px;
   height: 120px;
-  z-index: -1;
+  z-index: 0;
   border: 8px solid rgba(255, 255, 255, 0.75);
   border-radius: 52% 52% 24px 24px;
   background: linear-gradient(180deg, #edf8ff, #d6eef8);
 }
 
-.brain-emoji {
-  position: absolute;
-  top: 18px;
-  font-size: 9.5rem;
-  opacity: 0.34;
-}
-
-.character-glasses {
-  position: absolute;
-  top: 118px;
-  color: var(--navy-950);
-  font-size: 2.25rem;
-  font-weight: 900;
-  letter-spacing: 10px;
-}
-
-.character-smile {
-  position: absolute;
-  top: 170px;
-  color: var(--navy-950);
-  font-size: 3rem;
-}
-
+/* FUNDO / MOLDURA DO CAIO */
 .avatar-betinho {
   width: 250px;
   height: 360px;
+  padding: 12px 10px 0;
   border-radius: 46% 46% 40px 40px;
   background: linear-gradient(180deg, #ffbc48, #ff8f20);
   box-shadow: inset -24px -30px 44px rgba(182, 74, 0, 0.18);
 }
 
-.boy-emoji {
-  font-size: 10.8rem;
-  transform: translateY(-24px);
+/* IMAGENS DOS PERSONAGENS */
+.character-image {
+  position: relative;
+  z-index: 2;
+
+  display: block;
+  width: auto;
+  height: auto;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+.character-image-neurado {
+  max-width: 215px;
+  max-height: 290px;
+}
+
+.character-image-betinho {
+  max-width: 225px;
+  max-height: 338px;
+}
+
+.character:hover .character-image {
+  transform: translateY(-6px) scale(1.02);
 }
 
 .character-label {
@@ -831,7 +852,7 @@ svg {
 .thought-card p {
   margin-top: 13px;
 
-  color: var(--text-soft);
+  color: black;
 
   font-size: 0.86rem;
   line-height: 1.7;
@@ -1581,7 +1602,7 @@ svg {
 
 .experts-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 
@@ -1595,7 +1616,7 @@ svg {
 }
 
 .expert-card img {
-  height: 225px;
+  height: 320px;
   object-fit: cover;
 }
 
@@ -1657,66 +1678,242 @@ svg {
   line-height: 1.62;
 }
 
-/* BLOG */
+/* ==================================================
+   RADAR DE APOSTAS
+================================================== */
 
-.article-grid {
+.radar-section {
+  background:
+    radial-gradient(
+      circle at 88% 12%,
+      rgba(69, 224, 186, 0.1),
+      transparent 24%
+    ),
+    linear-gradient(180deg, #ffffff, #f7f8fc);
+}
+
+.radar-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 42px;
+}
+
+.radar-heading {
+  margin: 0;
+  text-align: left;
+}
+
+.radar-heading p {
+  margin-left: 0;
+}
+
+.radar-update {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border: 1px solid rgba(11, 115, 223, 0.13);
+  border-radius: 999px;
+  background: rgba(11, 115, 223, 0.06);
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.radar-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 24px;
 }
 
-.article-card {
+.radar-side {
+  display: grid;
+  gap: 18px;
+}
+
+.radar-card {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--white);
   box-shadow: var(--shadow-soft);
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
 }
 
-.article-card:hover {
-  transform: translateY(-8px);
+.radar-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(11, 115, 223, 0.18);
   box-shadow: var(--shadow);
 }
 
-.article-card img {
-  height: 215px;
+.radar-image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.radar-image img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.45s ease;
 }
 
-.article-card div {
-  padding: 23px;
+.radar-card:hover .radar-image img {
+  transform: scale(1.045);
 }
 
-.article-card span {
-  color: var(--blue);
-  font-size: 0.7rem;
+.radar-card-featured .radar-image {
+  height: 360px;
+}
+
+.radar-card-small {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  min-height: 165px;
+}
+
+.radar-card-small .radar-image {
+  height: 100%;
+}
+
+.radar-category {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  display: inline-flex;
+  padding: 7px 11px;
+  border-radius: 999px;
+  background: rgba(4, 22, 45, 0.86);
+  color: var(--white);
+  font-size: 0.66rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  backdrop-filter: blur(8px);
 }
 
-.article-card h3 {
-  margin-top: 9px;
-  font-family: "Manrope", sans-serif;
-  font-size: 1.06rem;
-  line-height: 1.38;
+.radar-content {
+  padding: 24px;
 }
 
-.article-card p {
-  margin-top: 10px;
+.radar-card-small .radar-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 19px 20px;
+}
+
+.radar-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
   color: var(--muted);
-  font-size: 0.84rem;
-  line-height: 1.62;
+  font-size: 0.7rem;
+  font-weight: 700;
 }
 
-.section-center {
-  margin-top: 32px;
+.radar-meta span {
+  color: var(--blue);
+}
+
+.radar-content h3 {
+  margin-top: 11px;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.radar-card-featured h3 {
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  line-height: 1.24;
+}
+
+.radar-content p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.68;
+}
+
+.radar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  margin-top: 18px;
+  color: var(--blue);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.radar-card-small .radar-link {
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.radar-link svg {
+  transition: transform 0.25s ease;
+}
+
+.radar-link:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.radar-footer {
+  margin-top: 25px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.6;
   text-align: center;
 }
 
+@media (max-width: 900px) {
+  .radar-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .radar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .radar-side {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .radar-card-small {
+    display: block;
+  }
+
+  .radar-card-small .radar-image {
+    height: 210px;
+  }
+}
+
+@media (max-width: 680px) {
+  .radar-card-featured .radar-image {
+    height: 250px;
+  }
+
+  .radar-side {
+    grid-template-columns: 1fr;
+  }
+
+  .radar-card-small .radar-image {
+    height: 220px;
+  }
+
+  .radar-content {
+    padding: 21px;
+  }
+}
 /* CTA */
 
 .cta-section {
@@ -2159,6 +2356,7 @@ svg {
   .avatar-neurado {
     width: 150px;
     height: 220px;
+    padding: 10px 8px 0;
   }
 
   .avatar-neurado::after {
@@ -2171,24 +2369,17 @@ svg {
   .avatar-betinho {
     width: 158px;
     height: 245px;
+    padding: 8px 8px 0;
   }
 
-  .boy-emoji {
-    font-size: 7.4rem;
+  .character-image-neurado {
+    max-width: 132px;
+    max-height: 195px;
   }
 
-  .brain-emoji {
-    font-size: 6rem;
-  }
-
-  .character-glasses {
-    top: 82px;
-    font-size: 1.45rem;
-  }
-
-  .character-smile {
-    top: 118px;
-    font-size: 2rem;
+  .character-image-betinho {
+    max-width: 142px;
+    max-height: 224px;
   }
 
   .character-label {
@@ -2278,11 +2469,23 @@ svg {
   .avatar-neurado {
     width: 132px;
     height: 195px;
+    padding: 8px 6px 0;
   }
 
   .avatar-betinho {
     width: 140px;
     height: 215px;
+    padding: 7px 6px 0;
+  }
+
+  .character-image-neurado {
+    max-width: 116px;
+    max-height: 172px;
+  }
+
+  .character-image-betinho {
+    max-width: 126px;
+    max-height: 196px;
   }
 
   .character-label {
