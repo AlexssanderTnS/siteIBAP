@@ -898,10 +898,12 @@ svg {
 .thought-card:hover .flip-card-face {
   border-color: rgba(13, 97, 156, 0.28);
   box-shadow: var(--shadow-large);
+   
 }
 
 .thought-card:focus-visible {
   outline: 3px solid rgba(13, 97, 156, 0.3);
+
   outline-offset: 5px;
 }
 
