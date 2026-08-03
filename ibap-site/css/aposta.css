@@ -89,7 +89,7 @@ svg {
 }
 
 .section-soft {
-  background: linear-gradient(180deg, #fbfbfe, #f7f8fc);
+  background: #fff;
 }
 
 .section-heading {
@@ -625,7 +625,7 @@ svg {
   bottom: -82px;
   height: 150px;
   border-radius: 50% 50% 0 0;
-  background: var(--white);
+  background: #fff;
   transform: rotate(-2deg);
 }
 
