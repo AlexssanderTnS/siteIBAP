@@ -228,3 +228,73 @@ if (document.readyState === "loading") {
 } else {
   initializeIcons();
 }
+
+
+const statisticNumbers = document.querySelectorAll(".stat-number");
+
+const formatStatisticValue = (element, value) => {
+  const prefix = element.dataset.prefix || "";
+  const suffix = element.dataset.suffix || "";
+  const decimals = Number(element.dataset.decimals || 0);
+
+  const formattedValue = value.toLocaleString("pt-BR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+  return `${prefix}${formattedValue}${suffix}`;
+};
+
+const animateStatistic = (element) => {
+  if (element.dataset.animated === "true") {
+    return;
+  }
+
+  const target = Number(element.dataset.target);
+
+  if (!Number.isFinite(target)) {
+    console.warn("Valor inválido em data-target:", element);
+    return;
+  }
+
+  element.dataset.animated = "true";
+
+  const duration = 1800;
+  const startTime = performance.now();
+
+  const updateNumber = (currentTime) => {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    const currentValue = target * easedProgress;
+
+    element.textContent = formatStatisticValue(element, currentValue);
+
+    if (progress < 1) {
+      requestAnimationFrame(updateNumber);
+    }
+  };
+
+  requestAnimationFrame(updateNumber);
+};
+
+const statisticObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;
+      }
+
+      animateStatistic(entry.target);
+      observer.unobserve(entry.target);
+    });
+  },
+  {
+    threshold: 0.45,
+  },
+);
+
+statisticNumbers.forEach((number) => {
+  statisticObserver.observe(number);
+});
