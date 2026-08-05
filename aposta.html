@@ -15,7 +15,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="icon" href="ibap-site/assets/images/Icon.png" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="ibap-site/assets/images/Icon.png"
+      type="image/x-icon"
+    />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
@@ -23,8 +27,7 @@
     />
 
     <link rel="stylesheet" href="/ibap-site/css/aposta.css" />
-    <link rel="stylesheet" href="/ibap-site/css/aposta-fixes.css" />
-    
+
 
     <script src="https://unpkg.com/lucide@latest" defer></script>
 
@@ -34,11 +37,7 @@
   <body>
     <header class="header" id="inicio">
       <div class="container header-inner">
-        <a
-          class="brand"
-          href="#"
-          aria-label="IBAP-RJ EAD - Página inicial"
-        >
+        <a class="brand" href="#" aria-label="IBAP-RJ EAD - Página inicial">
           <img
             class="brand-logo"
             src="ibap-site/assets/images/LogoIBAPead.png"
@@ -67,7 +66,7 @@
           <a href="#radar-apostas">Radar de Apostas</a>
         </nav>
 
-        <a class="header-cta" href="#comecar">
+        <a class="header-cta" href="#">
           Começar agora
           <i data-lucide="arrow-up-right"></i>
         </a>
@@ -75,7 +74,7 @@
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero" id="comeco">
         <div class="hero-grid" aria-hidden="true"></div>
 
         <span class="floating-icon floating-coin" aria-hidden="true">
@@ -85,8 +84,6 @@
         <span class="floating-icon floating-chart" aria-hidden="true">
           <i data-lucide="chart-no-axes-column-increasing"></i>
         </span>
-
-    
 
         <div class="container hero-layout">
           <div class="hero-content reveal reveal-left">
@@ -107,7 +104,7 @@
             </p>
 
             <div class="hero-actions">
-              <a class="button button-mint" href="#jornada">
+              <a class="button button-mint" href="#">
                 Começar jornada
                 <i data-lucide="arrow-right"></i>
               </a>
@@ -915,7 +912,7 @@
           <div class="section-heading reveal">
             <span class="eyebrow"> Conteúdo com responsabilidade </span>
 
-            <h2> Especialistas ao seu lado</h2>
+            <h2>Especialistas ao seu lado</h2>
 
             <p>
               Experiência em comportamento, adicção e terapia
@@ -1311,25 +1308,5 @@
       </div>
     </footer>
 
-    <dialog class="reflection-modal" id="reflection-modal">
-      <button class="modal-close" type="button" aria-label="Fechar">
-        <i data-lucide="x"></i>
-      </button>
-
-      <span class="modal-icon">
-        <i data-lucide="lightbulb"></i>
-      </span>
-
-      <h2>Vale a pena refletir</h2>
-
-      <p id="modal-text">
-        Pequenas frases podem mostrar como emoção e impulso influenciam
-        decisões.
-      </p>
-
-      <button class="button button-mint modal-button" type="button">
-        Entendi
-      </button>
-    </dialog>
   </body>
 </html>
