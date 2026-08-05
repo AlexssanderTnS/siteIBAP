@@ -75,7 +75,15 @@ li {
   height: 100%;
   transform: scaleX(var(--scroll-progress));
   transform-origin: left center;
-  background: linear-gradient(90deg, var(--mint), var(--cyan), var(--blue), var(--purple), var(--orange), var(--yellow));
+  background: linear-gradient(
+    90deg,
+    var(--mint),
+    var(--cyan),
+    var(--blue),
+    var(--purple),
+    var(--orange),
+    var(--yellow)
+  );
   box-shadow: 0 0 12px rgba(24, 198, 214, 0.55);
   will-change: transform;
 }
@@ -88,7 +96,9 @@ li {
   opacity: 0;
   background: rgba(4, 22, 45, 0.5);
   backdrop-filter: blur(3px);
-  transition: opacity 0.25s ease, visibility 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
 }
 
 body.menu-open .menu-backdrop {
@@ -123,7 +133,8 @@ body.menu-open .menu-backdrop {
 }
 
 .hero-layout {
-  width: 100%;
+  width: min(calc(100% - 40px), 1240px);
+  margin-inline: auto;
 }
 
 .hero-content h1 {
@@ -395,7 +406,9 @@ body.menu-open .menu-backdrop {
   }
 
   .menu-toggle span {
-    transition: transform 0.22s ease, opacity 0.22s ease;
+    transition:
+      transform 0.22s ease,
+      opacity 0.22s ease;
   }
 
   .menu-toggle[aria-expanded="true"] span:nth-child(1) {

@@ -291,7 +291,7 @@ svg {
 }
 
 .hero-layout {
-  min-height: 650px;
+  min-height: 50px;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   align-items: center;
