@@ -8,6 +8,80 @@ const newsletterForm = document.querySelector(".newsletter-form");
 const currentYear = document.querySelector("#current-year");
 const statisticNumbers = document.querySelectorAll(".stat-number");
 
+function createHeaderFlowBar() {
+  const header = document.querySelector(".header");
+  if (!header || header.querySelector(".header-flow-bar")) return;
+
+  const style = document.createElement("style");
+  style.textContent = `
+    .header-flow-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 4px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 60;
+    }
+
+    .header-flow-bar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 220%;
+      background: linear-gradient(
+        90deg,
+        #45e0ba 0%,
+        #18c6d6 20%,
+        #0b73df 40%,
+        #8e69ef 60%,
+        #ff8c2a 80%,
+        #ffca3a 100%
+      );
+      background-size: 50% 100%;
+      animation: header-flow 6s linear infinite;
+      filter: saturate(1.12);
+    }
+
+    @keyframes header-flow {
+      from {
+        transform: translateX(-50%);
+      }
+
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    @media (min-width: 1600px) {
+      .header-flow-bar {
+        height: 5px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .header-flow-bar {
+        height: 3px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .header-flow-bar::before {
+        animation: none;
+        transform: none;
+      }
+    }
+  `;
+
+  const flowBar = document.createElement("div");
+  flowBar.className = "header-flow-bar";
+  flowBar.setAttribute("aria-hidden", "true");
+
+  document.head.appendChild(style);
+  header.appendChild(flowBar);
+}
+
 function closeMobileMenu() {
   if (!menuToggle || !mainNav) return;
 
@@ -202,6 +276,7 @@ function initializeStatistics() {
 }
 
 function initializePage() {
+  createHeaderFlowBar();
   initializeMenu();
   initializeReveal();
   initializeActiveNavigation();
