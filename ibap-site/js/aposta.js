@@ -14,15 +14,30 @@ let scrollFrame = null;
 let lastFocusedElement = null;
 
 function loadResponsiveFixes() {
-  if (document.querySelector('link[data-aposta-fixes="true"]')) {
-    return;
-  }
+  const stylesheets = [
+    {
+      selector: 'link[data-aposta-fixes="true"]',
+      href: "/ibap-site/css/aposta-fixes.css",
+      datasetKey: "apostaFixes"
+    },
+    {
+      selector: 'link[data-aposta-layout-final="true"]',
+      href: "/ibap-site/css/aposta-layout-final.css",
+      datasetKey: "apostaLayoutFinal"
+    }
+  ];
 
-  const stylesheet = document.createElement("link");
-  stylesheet.rel = "stylesheet";
-  stylesheet.href = "/ibap-site/css/aposta-fixes.css";
-  stylesheet.dataset.apostaFixes = "true";
-  document.head.appendChild(stylesheet);
+  stylesheets.forEach(({ selector, href, datasetKey }) => {
+    if (document.querySelector(selector)) {
+      return;
+    }
+
+    const stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = href;
+    stylesheet.dataset[datasetKey] = "true";
+    document.head.appendChild(stylesheet);
+  });
 }
 
 function normalizeInternalNavigation() {
