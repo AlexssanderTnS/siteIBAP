@@ -8,82 +8,10 @@ const newsletterForm = document.querySelector(".newsletter-form");
 const currentYear = document.querySelector("#current-year");
 const statisticNumbers = document.querySelectorAll(".stat-number");
 
-function createHeaderFlowBar() {
-  const header = document.querySelector(".header");
-  if (!header || header.querySelector(".header-flow-bar")) return;
-
-  const style = document.createElement("style");
-  style.textContent = `
-    .header-flow-bar {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -1px;
-      height: 4px;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 60;
-    }
-
-    .header-flow-bar::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      width: 220%;
-      background: linear-gradient(
-        90deg,
-        #45e0ba 0%,
-        #18c6d6 20%,
-        #0b73df 40%,
-        #8e69ef 60%,
-        #ff8c2a 80%,
-        #ffca3a 100%
-      );
-      background-size: 50% 100%;
-      animation: header-flow 6s linear infinite;
-      filter: saturate(1.12);
-    }
-
-    @keyframes header-flow {
-      from {
-        transform: translateX(-50%);
-      }
-
-      to {
-        transform: translateX(0);
-      }
-    }
-
-    @media (min-width: 1600px) {
-      .header-flow-bar {
-        height: 5px;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .header-flow-bar {
-        height: 3px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .header-flow-bar::before {
-        animation: none;
-        transform: none;
-      }
-    }
-  `;
-
-  const flowBar = document.createElement("div");
-  flowBar.className = "header-flow-bar";
-  flowBar.setAttribute("aria-hidden", "true");
-
-  document.head.appendChild(style);
-  header.appendChild(flowBar);
-}
-
 function closeMobileMenu() {
-  if (!menuToggle || !mainNav) return;
+  if (!menuToggle || !mainNav) {
+    return;
+  }
 
   mainNav.classList.remove("open");
   document.body.classList.remove("menu-open");
@@ -92,7 +20,9 @@ function closeMobileMenu() {
 }
 
 function toggleMobileMenu() {
-  if (!menuToggle || !mainNav) return;
+  if (!menuToggle || !mainNav) {
+    return;
+  }
 
   const isOpen = mainNav.classList.toggle("open");
   document.body.classList.toggle("menu-open", isOpen);
@@ -100,119 +30,17 @@ function toggleMobileMenu() {
   menuToggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
 }
 
-function initializeMenu() {
-  if (!menuToggle || !mainNav) return;
-
-  menuToggle.addEventListener("click", toggleMobileMenu);
-  navigationLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMobileMenu();
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 900) closeMobileMenu();
-  });
-}
-
-function initializeReveal() {
-  if (!("IntersectionObserver" in window)) {
-    revealElements.forEach((element) => element.classList.add("visible"));
-    return;
-  }
-
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      });
-    },
-    {
-      threshold: 0.12,
-      rootMargin: "0px 0px -32px"
-    }
-  );
-
-  revealElements.forEach((element) => revealObserver.observe(element));
-}
-
-function initializeActiveNavigation() {
-  if (!("IntersectionObserver" in window)) return;
-
-  const navigationObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        navigationLinks.forEach((link) => {
-          const destination = link.getAttribute("href");
-          link.classList.toggle("active", destination === `#${entry.target.id}`);
-        });
-      });
-    },
-    {
-      rootMargin: "-38% 0px -54%"
-    }
-  );
-
-  pageSections.forEach((section) => navigationObserver.observe(section));
-}
-
 function setThoughtCardState(card, isFlipped) {
   card.classList.toggle("is-flipped", isFlipped);
   card.setAttribute("aria-pressed", String(isFlipped));
 }
 
-function initializeThoughtCards() {
+function closeOtherThoughtCards(selectedCard) {
   thoughtCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const willFlip = !card.classList.contains("is-flipped");
-
-      thoughtCards.forEach((otherCard) => {
-        if (otherCard !== card) setThoughtCardState(otherCard, false);
-      });
-
-      setThoughtCardState(card, willFlip);
-    });
+    if (card !== selectedCard) {
+      setThoughtCardState(card, false);
+    }
   });
-}
-
-function initializeNewsletter() {
-  if (!newsletterForm) return;
-
-  newsletterForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const input = newsletterForm.querySelector("input");
-    const button = newsletterForm.querySelector("button");
-
-    if (!input || !button) return;
-
-    input.value = "";
-    input.placeholder = "Cadastro realizado!";
-    input.disabled = true;
-    button.innerHTML = '<i data-lucide="check"></i>';
-    button.setAttribute("aria-label", "E-mail cadastrado");
-    initializeIcons();
-
-    window.setTimeout(() => {
-      input.disabled = false;
-      input.placeholder = "seu@email.com";
-      button.innerHTML = '<i data-lucide="send"></i>';
-      button.setAttribute("aria-label", "Cadastrar e-mail");
-      initializeIcons();
-    }, 3000);
-  });
-}
-
-function initializeYear() {
-  if (currentYear) currentYear.textContent = new Date().getFullYear();
-}
-
-function initializeIcons() {
-  if (window.lucide) window.lucide.createIcons();
 }
 
 function formatStatisticValue(element, value) {
@@ -228,12 +56,23 @@ function formatStatisticValue(element, value) {
 }
 
 function animateStatistic(element) {
-  if (element.dataset.animated === "true") return;
+  if (element.dataset.animated === "true") {
+    return;
+  }
 
   const target = Number(element.dataset.target);
-  if (!Number.isFinite(target)) return;
+
+  if (!Number.isFinite(target)) {
+    return;
+  }
 
   element.dataset.animated = "true";
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    element.textContent = formatStatisticValue(element, target);
+    return;
+  }
+
   const duration = 1800;
   const startTime = performance.now();
 
@@ -245,15 +84,67 @@ function animateStatistic(element) {
 
     element.textContent = formatStatisticValue(element, currentValue);
 
-    if (progress < 1) requestAnimationFrame(updateNumber);
+    if (progress < 1) {
+      requestAnimationFrame(updateNumber);
+    }
   }
 
   requestAnimationFrame(updateNumber);
 }
 
-function initializeStatistics() {
-  if (!statisticNumbers.length) return;
+function initializeReveal() {
+  if (!("IntersectionObserver" in window)) {
+    revealElements.forEach((element) => element.classList.add("visible"));
+    return;
+  }
 
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -32px"
+    }
+  );
+
+  revealElements.forEach((element) => revealObserver.observe(element));
+}
+
+function initializeNavigationObserver() {
+  if (!("IntersectionObserver" in window)) {
+    return;
+  }
+
+  const navigationObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        navigationLinks.forEach((link) => {
+          const destination = link.getAttribute("href");
+          link.classList.toggle("active", destination === `#${entry.target.id}`);
+        });
+      });
+    },
+    {
+      rootMargin: "-38% 0px -54%"
+    }
+  );
+
+  pageSections.forEach((section) => navigationObserver.observe(section));
+}
+
+function initializeStatistics() {
   if (!("IntersectionObserver" in window)) {
     statisticNumbers.forEach(animateStatistic);
     return;
@@ -262,7 +153,10 @@ function initializeStatistics() {
   const statisticObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting) {
+          return;
+        }
+
         animateStatistic(entry.target);
         observer.unobserve(entry.target);
       });
@@ -275,14 +169,83 @@ function initializeStatistics() {
   statisticNumbers.forEach((number) => statisticObserver.observe(number));
 }
 
+function initializeIcons() {
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+}
+
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener("click", toggleMobileMenu);
+
+  navigationLinks.forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!mainNav.classList.contains("open")) {
+      return;
+    }
+
+    if (!mainNav.contains(event.target) && !menuToggle.contains(event.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMobileMenu();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) {
+      closeMobileMenu();
+    }
+  });
+}
+
+thoughtCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    const willFlip = !card.classList.contains("is-flipped");
+    closeOtherThoughtCards(card);
+    setThoughtCardState(card, willFlip);
+  });
+});
+
+newsletterForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const input = newsletterForm.querySelector("input");
+  const button = newsletterForm.querySelector("button");
+
+  if (!input || !button) {
+    return;
+  }
+
+  input.value = "";
+  input.placeholder = "Cadastro realizado!";
+  input.disabled = true;
+  button.innerHTML = '<i data-lucide="check"></i>';
+  button.setAttribute("aria-label", "E-mail cadastrado");
+  initializeIcons();
+
+  window.setTimeout(() => {
+    input.disabled = false;
+    input.placeholder = "seu@email.com";
+    button.innerHTML = '<i data-lucide="send"></i>';
+    button.setAttribute("aria-label", "Cadastrar e-mail");
+    initializeIcons();
+  }, 3000);
+});
+
+if (currentYear) {
+  currentYear.textContent = new Date().getFullYear();
+}
+
 function initializePage() {
-  createHeaderFlowBar();
-  initializeMenu();
   initializeReveal();
-  initializeActiveNavigation();
-  initializeThoughtCards();
-  initializeNewsletter();
-  initializeYear();
+  initializeNavigationObserver();
   initializeStatistics();
   initializeIcons();
 }
