@@ -1,7 +1,7 @@
 .thought-card {
   position: relative;
   isolation: isolate;
-  touch-action: manipulation;
+  touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -13,6 +13,7 @@
   transform: rotateY(0deg);
   -webkit-transform: rotateY(0deg);
   will-change: transform;
+  touch-action: pan-y;
 }
 
 .thought-card.is-flipped .flip-card-inner {
@@ -26,6 +27,9 @@
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   overflow: hidden;
+  overscroll-behavior: auto;
+  touch-action: pan-y;
+  pointer-events: none;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -37,6 +41,11 @@
 .flip-card-back {
   transform: rotateY(180deg) translateZ(1px);
   -webkit-transform: rotateY(180deg) translateZ(1px);
+}
+
+.thought-card-content,
+.thought-card-content * {
+  touch-action: pan-y;
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -59,7 +68,7 @@
   .thought-card,
   .flip-card-inner,
   .flip-card-face {
-    min-height: 560px;
+    min-height: 540px;
   }
 }
 
@@ -67,11 +76,19 @@
   .thought-card,
   .flip-card-inner,
   .flip-card-face {
-    min-height: 590px;
+    min-height: 520px;
   }
 
   .flip-card-face {
-    overflow: hidden;
+    padding: 24px;
+  }
+
+  .thought-card-content {
+    margin-top: 22px;
+  }
+
+  .thought-link {
+    padding-top: 18px;
   }
 }
 
@@ -79,7 +96,37 @@
   .thought-card,
   .flip-card-inner,
   .flip-card-face {
-    min-height: 630px;
+    min-height: 500px;
+  }
+
+  .flip-card-face {
+    padding: 22px;
+    border-radius: 28px;
+  }
+
+  .thought-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+  }
+
+  .thought-card-content {
+    margin-top: 18px;
+  }
+
+  .thought-card strong {
+    font-size: 1.18rem;
+  }
+
+  .thought-card p {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    line-height: 1.58;
+  }
+
+  .thought-link {
+    padding-top: 14px;
+    font-size: 0.8rem;
   }
 }
 
@@ -87,7 +134,19 @@
   .thought-card,
   .flip-card-inner,
   .flip-card-face {
-    min-height: 660px;
+    min-height: 490px;
+  }
+
+  .flip-card-face {
+    padding: 20px;
+  }
+
+  .thought-card strong {
+    font-size: 1.12rem;
+  }
+
+  .thought-card p {
+    font-size: 0.8rem;
   }
 }
 
